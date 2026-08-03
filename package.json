@@ -1,5 +1,6 @@
 {
-  "name": "nextjs-tailwind-i18n-template",
+  "name": "universal-game-design-framework",
+  "description": "A guided questionnaire about the ideation process when designing games",
   "version": "0.1.0",
   "author": {
     "name": "Santiago Pintus"
