@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Open_Sans, Fira_Code } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -8,13 +8,8 @@ import { routing } from '@/i18n/routing';
 import '../globals.css';
 import { Locales } from '@/i18n/request';
 
-const openSans = Open_Sans({
-  variable: '--font-open-sans',
-  subsets: ['latin'],
-});
-
-const firaCode = Fira_Code({
-  variable: '--font-fira-code',
+const mainFont = Inter({
+  variable: '--primary-font',
   subsets: ['latin'],
 });
 
@@ -60,10 +55,7 @@ export default async function LocaleLayout({
         <link rel="icon" href="./favicon.ico" />
         <link rel="apple-touch-icon" href="./favicon.png" />
       </head>
-      <body
-        className={`${openSans.variable} ${firaCode.variable} antialiased`}
-        suppressHydrationWarning
-      >
+      <body className={`${mainFont.variable} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>
