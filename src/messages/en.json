@@ -14,5 +14,144 @@
   "footer": {
     "name": "Santiago Pintus",
     "rights": "All rights reserved."
+  },
+
+  "form": {
+    "title": "Universal Game Design Framework",
+    "description": "High-level framework for designing games before writing a GDD.",
+    "placeholder": "Write here...",
+
+    "sections": {
+      "constraints": {
+        "title": "1. Project Constraints",
+        "fields": {
+          "budget": { "title": "Budget", "guide": "What budget constraints should influence the design?" },
+          "teamSize": { "title": "Team Size", "guide": "Who is building this game? What skills are available?" },
+          "technology": { "title": "Technology", "guide": "What engine, tools, or physical components will be used?" },
+          "productionScope": { "title": "Production Scope", "guide": "How ambitious should this project be? What should intentionally remain out of scope?" }
+        }
+      },
+
+      "concept": {
+        "title": "2. Game Concept",
+        "fields": {
+          "pitch": { "title": "One-Sentence Pitch", "guide": "Describe the game in one sentence." },
+          "summary": { "title": "Concept Summary", "guide": "What is the core idea? Why does this game exist?" }
+        }
+      },
+
+      "mda": {
+        "title": "3. MDA Framework",
+        "aesthetics": {
+          "heading": "Aesthetics",
+          "fields": {
+            "emotionalExperience": { "title": "Emotional Experience", "guide": "What emotions should players feel?" },
+            "playerFantasy": { "title": "Player Fantasy", "guide": "Who does the player become?" },
+            "desiredExperience": { "title": "Desired Experience", "guide": "How should players describe the game after playing?" },
+            "memorableMoments": { "title": "Memorable Moments", "guide": "What moments should players remember?" }
+          }
+        },
+        "mechanics": {
+          "heading": "Mechanics",
+          "fields": {
+            "coreMechanics": { "title": "Core Mechanics", "guide": "What are the primary actions?" },
+            "resources": { "title": "Resources", "guide": "What resources are managed?" },
+            "rules": { "title": "Rules", "guide": "What fundamental rules define the game?" },
+            "progressionSystems": { "title": "Progression Systems", "guide": "How does the player become more capable?" }
+          }
+        },
+        "dynamics": {
+          "heading": "Dynamics",
+          "fields": {
+            "playerBehaviors": { "title": "Player Behaviors", "guide": "What behaviors should emerge?" },
+            "decisionMaking": { "title": "Decision Making", "guide": "What meaningful choices recur?" },
+            "riskVsReward": { "title": "Risk vs Reward", "guide": "How is strategic thinking encouraged?" },
+            "socialDynamics": { "title": "Social Dynamics", "guide": "How do players cooperate or compete?" }
+          }
+        }
+      },
+
+      "setting": {
+        "title": "4. Setting",
+        "fields": {
+          "world": { "title": "World", "guide": "Where does the game take place?" },
+          "theme": { "title": "Theme", "guide": "What is the tone and atmosphere?" },
+          "environmentalStorytelling": { "title": "Environmental Storytelling", "guide": "How does the world communicate its history and mood?" }
+        }
+      },
+
+      "gameLoop": {
+        "title": "5. Game Loop",
+        "fields": {
+          "coreLoop": { "title": "Core Loop", "guide": "What actions repeat throughout the game?" },
+          "sessionFlow": { "title": "Session Flow", "guide": "What does a typical play session look like?" },
+          "longTermProgression": { "title": "Long-Term Progression", "guide": "What keeps players engaged across sessions?" }
+        }
+      },
+
+      "playerGoals": {
+        "title": "6. Player Goals",
+        "fields": {
+          "shortTerm": { "title": "Short-Term Goals", "guide": "What should players accomplish in the next few minutes?" },
+          "midTerm": { "title": "Mid-Term Goals", "guide": "What should players work toward over several sessions?" },
+          "longTerm": { "title": "Long-Term Goals", "guide": "What ultimate objectives motivate continued play?" }
+        }
+      },
+
+      "victoryFailure": {
+        "title": "7. Victory & Failure Conditions",
+        "fields": {
+          "victoryConditions": { "title": "Victory Conditions", "guide": "How does the player win? Are there multiple paths?" },
+          "failureConditions": { "title": "Failure Conditions", "guide": "How can the player fail? What are the consequences?" }
+        }
+      },
+
+      "difficulty": {
+        "title": "8. Difficulty & Progression",
+        "fields": {
+          "learningCurve": { "title": "Learning Curve", "guide": "How are mechanics introduced?" },
+          "difficultyCurve": { "title": "Difficulty Curve", "guide": "How does challenge increase?" },
+          "mastery": { "title": "Mastery", "guide": "How can experienced players continue improving?" }
+        }
+      },
+
+      "replayability": {
+        "title": "9. Replayability",
+        "fields": {
+          "replayValue": { "title": "Replay Value", "guide": "Why play again?" },
+          "variability": { "title": "Variability", "guide": "What changes between playthroughs?" }
+        }
+      },
+
+      "principles": {
+        "title": "10. Core Design Principles",
+        "fields": {
+          "principle1": { "title": "Principle 1", "guide": "What rule should always be followed?" },
+          "principle2": { "title": "Principle 2", "guide": "What should always be prioritized?" },
+          "principle3": { "title": "Principle 3", "guide": "What question should designers constantly ask?" },
+          "tradeoffs": { "title": "Trade-offs", "guide": "How should conflicts between good design options be resolved?" }
+        }
+      },
+
+      "successCriteria": {
+        "title": "11. Success Criteria",
+        "fields": {
+          "playerExperience": { "title": "Player Experience", "guide": "What should playtesters consistently feel or say?" },
+          "gameplay": { "title": "Gameplay", "guide": "What behaviors indicate the mechanics are working?" },
+          "designGoals": { "title": "Design Goals", "guide": "What observable outcomes define success?" },
+          "redFlags": { "title": "Red Flags", "guide": "What indicates the design is failing?" }
+        }
+      },
+
+      "pillars": {
+        "title": "12. Design Pillars",
+        "fields": {
+          "pillar1": { "title": "Pillar 1", "guide": "What is the most important aspect of this game?" },
+          "pillar2": { "title": "Pillar 2", "guide": "What makes this game unique?" },
+          "pillar3": { "title": "Pillar 3", "guide": "What experience must never be compromised?" },
+          "neverBecome": { "title": "Things This Game Should Never Become", "guide": "What directions would betray the game's identity?" }
+        }
+      }
+    }
   }
 }

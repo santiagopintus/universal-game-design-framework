@@ -14,5 +14,144 @@
   "footer": {
     "name": "Santiago Pintus",
     "rights": "Todos los derechos reservados."
+  },
+
+  "form": {
+    "title": "Framework Universal de Diseño de Juegos",
+    "description": "Framework de alto nivel para diseñar juegos antes de escribir un GDD.",
+    "placeholder": "Escribe aquí...",
+
+    "sections": {
+      "constraints": {
+        "title": "1. Restricciones del Proyecto",
+        "fields": {
+          "budget": { "title": "Presupuesto", "guide": "¿Qué restricciones de presupuesto deberían influir en el diseño?" },
+          "teamSize": { "title": "Tamaño del Equipo", "guide": "¿Quién está desarrollando este juego? ¿Qué habilidades hay disponibles?" },
+          "technology": { "title": "Tecnología", "guide": "¿Qué motor, herramientas o componentes físicos se utilizarán?" },
+          "productionScope": { "title": "Alcance de Producción", "guide": "¿Qué tan ambicioso debería ser este proyecto? ¿Qué debería quedar intencionalmente fuera de alcance?" }
+        }
+      },
+
+      "concept": {
+        "title": "2. Concepto del Juego",
+        "fields": {
+          "pitch": { "title": "Pitch en Una Frase", "guide": "Describe el juego en una sola frase." },
+          "summary": { "title": "Resumen del Concepto", "guide": "¿Cuál es la idea central? ¿Por qué existe este juego?" }
+        }
+      },
+
+      "mda": {
+        "title": "3. Framework MDA",
+        "aesthetics": {
+          "heading": "Estética",
+          "fields": {
+            "emotionalExperience": { "title": "Experiencia Emocional", "guide": "¿Qué emociones deberían sentir los jugadores?" },
+            "playerFantasy": { "title": "Fantasía del Jugador", "guide": "¿En quién se convierte el jugador?" },
+            "desiredExperience": { "title": "Experiencia Deseada", "guide": "¿Cómo deberían describir el juego los jugadores después de jugarlo?" },
+            "memorableMoments": { "title": "Momentos Memorables", "guide": "¿Qué momentos deberían recordar los jugadores?" }
+          }
+        },
+        "mechanics": {
+          "heading": "Mecánicas",
+          "fields": {
+            "coreMechanics": { "title": "Mecánicas Principales", "guide": "¿Cuáles son las acciones primarias?" },
+            "resources": { "title": "Recursos", "guide": "¿Qué recursos se gestionan?" },
+            "rules": { "title": "Reglas", "guide": "¿Qué reglas fundamentales definen el juego?" },
+            "progressionSystems": { "title": "Sistemas de Progresión", "guide": "¿Cómo se vuelve más capaz el jugador?" }
+          }
+        },
+        "dynamics": {
+          "heading": "Dinámicas",
+          "fields": {
+            "playerBehaviors": { "title": "Comportamientos del Jugador", "guide": "¿Qué comportamientos deberían emerger?" },
+            "decisionMaking": { "title": "Toma de Decisiones", "guide": "¿Qué elecciones significativas se repiten?" },
+            "riskVsReward": { "title": "Riesgo vs Recompensa", "guide": "¿Cómo se fomenta el pensamiento estratégico?" },
+            "socialDynamics": { "title": "Dinámicas Sociales", "guide": "¿Cómo cooperan o compiten los jugadores?" }
+          }
+        }
+      },
+
+      "setting": {
+        "title": "4. Ambientación",
+        "fields": {
+          "world": { "title": "Mundo", "guide": "¿Dónde transcurre el juego?" },
+          "theme": { "title": "Tema", "guide": "¿Cuál es el tono y la atmósfera?" },
+          "environmentalStorytelling": { "title": "Narrativa Ambiental", "guide": "¿Cómo comunica el mundo su historia y estado de ánimo?" }
+        }
+      },
+
+      "gameLoop": {
+        "title": "5. Bucle de Juego",
+        "fields": {
+          "coreLoop": { "title": "Bucle Central", "guide": "¿Qué acciones se repiten a lo largo del juego?" },
+          "sessionFlow": { "title": "Flujo de la Sesión", "guide": "¿Cómo es una sesión de juego típica?" },
+          "longTermProgression": { "title": "Progresión a Largo Plazo", "guide": "¿Qué mantiene a los jugadores comprometidos entre sesiones?" }
+        }
+      },
+
+      "playerGoals": {
+        "title": "6. Objetivos del Jugador",
+        "fields": {
+          "shortTerm": { "title": "Objetivos a Corto Plazo", "guide": "¿Qué deberían lograr los jugadores en los próximos minutos?" },
+          "midTerm": { "title": "Objetivos a Mediano Plazo", "guide": "¿Hacia qué deberían trabajar los jugadores a lo largo de varias sesiones?" },
+          "longTerm": { "title": "Objetivos a Largo Plazo", "guide": "¿Qué objetivos finales motivan a seguir jugando?" }
+        }
+      },
+
+      "victoryFailure": {
+        "title": "7. Condiciones de Victoria y Derrota",
+        "fields": {
+          "victoryConditions": { "title": "Condiciones de Victoria", "guide": "¿Cómo gana el jugador? ¿Hay múltiples caminos?" },
+          "failureConditions": { "title": "Condiciones de Derrota", "guide": "¿Cómo puede fallar el jugador? ¿Cuáles son las consecuencias?" }
+        }
+      },
+
+      "difficulty": {
+        "title": "8. Dificultad y Progresión",
+        "fields": {
+          "learningCurve": { "title": "Curva de Aprendizaje", "guide": "¿Cómo se introducen las mecánicas?" },
+          "difficultyCurve": { "title": "Curva de Dificultad", "guide": "¿Cómo aumenta el desafío?" },
+          "mastery": { "title": "Maestría", "guide": "¿Cómo pueden los jugadores experimentados seguir mejorando?" }
+        }
+      },
+
+      "replayability": {
+        "title": "9. Rejugabilidad",
+        "fields": {
+          "replayValue": { "title": "Valor de Rejugabilidad", "guide": "¿Por qué volver a jugar?" },
+          "variability": { "title": "Variabilidad", "guide": "¿Qué cambia entre partidas?" }
+        }
+      },
+
+      "principles": {
+        "title": "10. Principios de Diseño Fundamentales",
+        "fields": {
+          "principle1": { "title": "Principio 1", "guide": "¿Qué regla se debería seguir siempre?" },
+          "principle2": { "title": "Principio 2", "guide": "¿Qué debería priorizarse siempre?" },
+          "principle3": { "title": "Principio 3", "guide": "¿Qué pregunta deberían hacerse constantemente los diseñadores?" },
+          "tradeoffs": { "title": "Compromisos", "guide": "¿Cómo deberían resolverse los conflictos entre buenas opciones de diseño?" }
+        }
+      },
+
+      "successCriteria": {
+        "title": "11. Criterios de Éxito",
+        "fields": {
+          "playerExperience": { "title": "Experiencia del Jugador", "guide": "¿Qué deberían sentir o decir consistentemente los playtesters?" },
+          "gameplay": { "title": "Jugabilidad", "guide": "¿Qué comportamientos indican que las mecánicas están funcionando?" },
+          "designGoals": { "title": "Objetivos de Diseño", "guide": "¿Qué resultados observables definen el éxito?" },
+          "redFlags": { "title": "Señales de Alerta", "guide": "¿Qué indica que el diseño está fallando?" }
+        }
+      },
+
+      "pillars": {
+        "title": "12. Pilares de Diseño",
+        "fields": {
+          "pillar1": { "title": "Pilar 1", "guide": "¿Cuál es el aspecto más importante de este juego?" },
+          "pillar2": { "title": "Pilar 2", "guide": "¿Qué hace único a este juego?" },
+          "pillar3": { "title": "Pilar 3", "guide": "¿Qué experiencia nunca debe comprometerse?" },
+          "neverBecome": { "title": "Cosas que Este Juego Nunca Debería Ser", "guide": "¿Qué direcciones traicionarían la identidad del juego?" }
+        }
+      }
+    }
   }
 }

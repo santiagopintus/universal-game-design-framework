@@ -1,129 +1,282 @@
+import { getTranslations } from 'next-intl/server';
 import Field from './Field';
 import Section from './FormSection';
 
-const MainForm = () => {
+const MainForm = async () => {
+  const t = await getTranslations('form');
+  const placeholder = t('placeholder');
+
   return (
     <main className="max-w-5xl mx-auto p-8 space-y-8">
-      <h1 className="text-4xl font-bold mb-2 text-foreground">Universal Game Design Framework</h1>
-      <p className="text-text-muted mb-8">
-        High-level framework for designing games before writing a GDD.
-      </p>
+      <h1 className="text-4xl font-bold mb-2 text-foreground">{t('title')}</h1>
+      <p className="text-text-muted mb-8">{t('description')}</p>
 
-      <Section title="1. Project Constraints">
-        <Field title="Budget" guide="What budget constraints should influence the design?" />
-        <Field title="Team Size" guide="Who is building this game? What skills are available?" />
+      <Section title={t('sections.constraints.title')}>
         <Field
-          title="Technology"
-          guide="What engine, tools, or physical components will be used?"
+          title={t('sections.constraints.fields.budget.title')}
+          guide={t('sections.constraints.fields.budget.guide')}
+          placeholder={placeholder}
         />
         <Field
-          title="Production Scope"
-          guide="How ambitious should this project be? What should intentionally remain out of scope?"
+          title={t('sections.constraints.fields.teamSize.title')}
+          guide={t('sections.constraints.fields.teamSize.guide')}
+          placeholder={placeholder}
         />
-      </Section>
-
-      <Section title="2. Game Concept">
-        <Field title="One-Sentence Pitch" guide="Describe the game in one sentence." />
-        <Field title="Concept Summary" guide="What is the core idea? Why does this game exist?" />
-      </Section>
-
-      <Section title="3. MDA Framework">
-        <h3 className="text-xl font-semibold mb-3 text-accent">Aesthetics</h3>
-        <Field title="Emotional Experience" guide="What emotions should players feel?" />
-        <Field title="Player Fantasy" guide="Who does the player become?" />
         <Field
-          title="Desired Experience"
-          guide="How should players describe the game after playing?"
+          title={t('sections.constraints.fields.technology.title')}
+          guide={t('sections.constraints.fields.technology.guide')}
+          placeholder={placeholder}
         />
-        <Field title="Memorable Moments" guide="What moments should players remember?" />
-        <h3 className="text-xl font-semibold mb-3 text-accent">Mechanics</h3>
-        <Field title="Core Mechanics" guide="What are the primary actions?" />
-        <Field title="Resources" guide="What resources are managed?" />
-        <Field title="Rules" guide="What fundamental rules define the game?" />
-        <Field title="Progression Systems" guide="How does the player become more capable?" />
-        <h3 className="text-xl font-semibold mb-3 text-accent">Dynamics</h3>
-        <Field title="Player Behaviors" guide="What behaviors should emerge?" />
-        <Field title="Decision Making" guide="What meaningful choices recur?" />
-        <Field title="Risk vs Reward" guide="How is strategic thinking encouraged?" />
-        <Field title="Social Dynamics" guide="How do players cooperate or compete?" />
-      </Section>
-
-      <Section title="4. Setting">
-        <Field title="World" guide="Where does the game take place?" />
-        <Field title="Theme" guide="What is the tone and atmosphere?" />
         <Field
-          title="Environmental Storytelling"
-          guide="How does the world communicate its history and mood?"
+          title={t('sections.constraints.fields.productionScope.title')}
+          guide={t('sections.constraints.fields.productionScope.guide')}
+          placeholder={placeholder}
         />
       </Section>
 
-      <Section title="5. Game Loop">
-        <Field title="Core Loop" guide="What actions repeat throughout the game?" />
-        <Field title="Session Flow" guide="What does a typical play session look like?" />
-        <Field title="Long-Term Progression" guide="What keeps players engaged across sessions?" />
-      </Section>
-
-      <Section title="6. Player Goals">
+      <Section title={t('sections.concept.title')}>
         <Field
-          title="Short-Term Goals"
-          guide="What should players accomplish in the next few minutes?"
+          title={t('sections.concept.fields.pitch.title')}
+          guide={t('sections.concept.fields.pitch.guide')}
+          placeholder={placeholder}
         />
         <Field
-          title="Mid-Term Goals"
-          guide="What should players work toward over several sessions?"
-        />
-        <Field title="Long-Term Goals" guide="What ultimate objectives motivate continued play?" />
-      </Section>
-
-      <Section title="7. Victory & Failure Conditions">
-        <Field
-          title="Victory Conditions"
-          guide="How does the player win? Are there multiple paths?"
-        />
-        <Field
-          title="Failure Conditions"
-          guide="How can the player fail? What are the consequences?"
+          title={t('sections.concept.fields.summary.title')}
+          guide={t('sections.concept.fields.summary.guide')}
+          placeholder={placeholder}
         />
       </Section>
 
-      <Section title="8. Difficulty & Progression">
-        <Field title="Learning Curve" guide="How are mechanics introduced?" />
-        <Field title="Difficulty Curve" guide="How does challenge increase?" />
-        <Field title="Mastery" guide="How can experienced players continue improving?" />
-      </Section>
-
-      <Section title="9. Replayability">
-        <Field title="Replay Value" guide="Why play again?" />
-        <Field title="Variability" guide="What changes between playthroughs?" />
-      </Section>
-
-      <Section title="10. Core Design Principles">
-        <Field title="Principle 1" guide="What rule should always be followed?" />
-        <Field title="Principle 2" guide="What should always be prioritized?" />
-        <Field title="Principle 3" guide="What question should designers constantly ask?" />
+      <Section title={t('sections.mda.title')}>
+        <h3 className="text-xl font-semibold mb-3 text-accent">{t('sections.mda.aesthetics.heading')}</h3>
         <Field
-          title="Trade-offs"
-          guide="How should conflicts between good design options be resolved?"
+          title={t('sections.mda.aesthetics.fields.emotionalExperience.title')}
+          guide={t('sections.mda.aesthetics.fields.emotionalExperience.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.mda.aesthetics.fields.playerFantasy.title')}
+          guide={t('sections.mda.aesthetics.fields.playerFantasy.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.mda.aesthetics.fields.desiredExperience.title')}
+          guide={t('sections.mda.aesthetics.fields.desiredExperience.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.mda.aesthetics.fields.memorableMoments.title')}
+          guide={t('sections.mda.aesthetics.fields.memorableMoments.guide')}
+          placeholder={placeholder}
+        />
+        <h3 className="text-xl font-semibold mb-3 text-accent">{t('sections.mda.mechanics.heading')}</h3>
+        <Field
+          title={t('sections.mda.mechanics.fields.coreMechanics.title')}
+          guide={t('sections.mda.mechanics.fields.coreMechanics.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.mda.mechanics.fields.resources.title')}
+          guide={t('sections.mda.mechanics.fields.resources.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.mda.mechanics.fields.rules.title')}
+          guide={t('sections.mda.mechanics.fields.rules.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.mda.mechanics.fields.progressionSystems.title')}
+          guide={t('sections.mda.mechanics.fields.progressionSystems.guide')}
+          placeholder={placeholder}
+        />
+        <h3 className="text-xl font-semibold mb-3 text-accent">{t('sections.mda.dynamics.heading')}</h3>
+        <Field
+          title={t('sections.mda.dynamics.fields.playerBehaviors.title')}
+          guide={t('sections.mda.dynamics.fields.playerBehaviors.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.mda.dynamics.fields.decisionMaking.title')}
+          guide={t('sections.mda.dynamics.fields.decisionMaking.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.mda.dynamics.fields.riskVsReward.title')}
+          guide={t('sections.mda.dynamics.fields.riskVsReward.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.mda.dynamics.fields.socialDynamics.title')}
+          guide={t('sections.mda.dynamics.fields.socialDynamics.guide')}
+          placeholder={placeholder}
         />
       </Section>
 
-      <Section title="11. Success Criteria">
+      <Section title={t('sections.setting.title')}>
         <Field
-          title="Player Experience"
-          guide="What should playtesters consistently feel or say?"
+          title={t('sections.setting.fields.world.title')}
+          guide={t('sections.setting.fields.world.guide')}
+          placeholder={placeholder}
         />
-        <Field title="Gameplay" guide="What behaviors indicate the mechanics are working?" />
-        <Field title="Design Goals" guide="What observable outcomes define success?" />
-        <Field title="Red Flags" guide="What indicates the design is failing?" />
+        <Field
+          title={t('sections.setting.fields.theme.title')}
+          guide={t('sections.setting.fields.theme.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.setting.fields.environmentalStorytelling.title')}
+          guide={t('sections.setting.fields.environmentalStorytelling.guide')}
+          placeholder={placeholder}
+        />
       </Section>
 
-      <Section title="12. Design Pillars">
-        <Field title="Pillar 1" guide="What is the most important aspect of this game?" />
-        <Field title="Pillar 2" guide="What makes this game unique?" />
-        <Field title="Pillar 3" guide="What experience must never be compromised?" />
+      <Section title={t('sections.gameLoop.title')}>
         <Field
-          title="Things This Game Should Never Become"
-          guide="What directions would betray the game's identity?"
+          title={t('sections.gameLoop.fields.coreLoop.title')}
+          guide={t('sections.gameLoop.fields.coreLoop.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.gameLoop.fields.sessionFlow.title')}
+          guide={t('sections.gameLoop.fields.sessionFlow.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.gameLoop.fields.longTermProgression.title')}
+          guide={t('sections.gameLoop.fields.longTermProgression.guide')}
+          placeholder={placeholder}
+        />
+      </Section>
+
+      <Section title={t('sections.playerGoals.title')}>
+        <Field
+          title={t('sections.playerGoals.fields.shortTerm.title')}
+          guide={t('sections.playerGoals.fields.shortTerm.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.playerGoals.fields.midTerm.title')}
+          guide={t('sections.playerGoals.fields.midTerm.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.playerGoals.fields.longTerm.title')}
+          guide={t('sections.playerGoals.fields.longTerm.guide')}
+          placeholder={placeholder}
+        />
+      </Section>
+
+      <Section title={t('sections.victoryFailure.title')}>
+        <Field
+          title={t('sections.victoryFailure.fields.victoryConditions.title')}
+          guide={t('sections.victoryFailure.fields.victoryConditions.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.victoryFailure.fields.failureConditions.title')}
+          guide={t('sections.victoryFailure.fields.failureConditions.guide')}
+          placeholder={placeholder}
+        />
+      </Section>
+
+      <Section title={t('sections.difficulty.title')}>
+        <Field
+          title={t('sections.difficulty.fields.learningCurve.title')}
+          guide={t('sections.difficulty.fields.learningCurve.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.difficulty.fields.difficultyCurve.title')}
+          guide={t('sections.difficulty.fields.difficultyCurve.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.difficulty.fields.mastery.title')}
+          guide={t('sections.difficulty.fields.mastery.guide')}
+          placeholder={placeholder}
+        />
+      </Section>
+
+      <Section title={t('sections.replayability.title')}>
+        <Field
+          title={t('sections.replayability.fields.replayValue.title')}
+          guide={t('sections.replayability.fields.replayValue.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.replayability.fields.variability.title')}
+          guide={t('sections.replayability.fields.variability.guide')}
+          placeholder={placeholder}
+        />
+      </Section>
+
+      <Section title={t('sections.principles.title')}>
+        <Field
+          title={t('sections.principles.fields.principle1.title')}
+          guide={t('sections.principles.fields.principle1.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.principles.fields.principle2.title')}
+          guide={t('sections.principles.fields.principle2.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.principles.fields.principle3.title')}
+          guide={t('sections.principles.fields.principle3.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.principles.fields.tradeoffs.title')}
+          guide={t('sections.principles.fields.tradeoffs.guide')}
+          placeholder={placeholder}
+        />
+      </Section>
+
+      <Section title={t('sections.successCriteria.title')}>
+        <Field
+          title={t('sections.successCriteria.fields.playerExperience.title')}
+          guide={t('sections.successCriteria.fields.playerExperience.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.successCriteria.fields.gameplay.title')}
+          guide={t('sections.successCriteria.fields.gameplay.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.successCriteria.fields.designGoals.title')}
+          guide={t('sections.successCriteria.fields.designGoals.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.successCriteria.fields.redFlags.title')}
+          guide={t('sections.successCriteria.fields.redFlags.guide')}
+          placeholder={placeholder}
+        />
+      </Section>
+
+      <Section title={t('sections.pillars.title')}>
+        <Field
+          title={t('sections.pillars.fields.pillar1.title')}
+          guide={t('sections.pillars.fields.pillar1.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.pillars.fields.pillar2.title')}
+          guide={t('sections.pillars.fields.pillar2.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.pillars.fields.pillar3.title')}
+          guide={t('sections.pillars.fields.pillar3.guide')}
+          placeholder={placeholder}
+        />
+        <Field
+          title={t('sections.pillars.fields.neverBecome.title')}
+          guide={t('sections.pillars.fields.neverBecome.guide')}
+          placeholder={placeholder}
         />
       </Section>
     </main>
