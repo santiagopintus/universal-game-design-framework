@@ -57,10 +57,6 @@ export default async function LocaleLayout({
         {/* Font preconnect hints for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* Favicon */}
-        <link rel="icon" href="./favicon.ico" />
-        <link rel="apple-touch-icon" href="./favicon.png" />
       </head>
       <body className={`${mainFont.variable} antialiased`} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>

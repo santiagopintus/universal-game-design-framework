@@ -8,7 +8,8 @@
 
   "header": {
     "languageLabel": "Idioma",
-    "toggleMenu": "Abrir menú"
+    "toggleMenu": "Abrir menú",
+    "loadLink": "Mis Ideas"
   },
 
   "footer": {
@@ -16,10 +17,23 @@
     "rights": "Todos los derechos reservados."
   },
 
+  "load": {
+    "title": "Ideas Guardadas",
+    "empty": "Todavía no hay ideas guardadas.",
+    "untitled": "Idea sin título",
+    "updatedAtLabel": "Última actualización:",
+    "loadButton": "Cargar",
+    "newIdea": "Nueva Idea"
+  },
+
   "form": {
     "title": "Framework Universal de Diseño de Juegos",
     "description": "Framework de alto nivel para diseñar juegos antes de escribir un GDD.",
     "placeholder": "Escribe aquí...",
+    "ideaTitleLabel": "Título de la Idea",
+    "ideaTitlePlaceholder": "Nombra esta idea de juego...",
+    "saveButton": "Guardar",
+    "savedConfirmation": "¡Guardado!",
 
     "sections": {
       "constraints": {

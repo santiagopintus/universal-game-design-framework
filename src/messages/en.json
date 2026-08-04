@@ -8,7 +8,8 @@
 
   "header": {
     "languageLabel": "Language",
-    "toggleMenu": "Toggle menu"
+    "toggleMenu": "Toggle menu",
+    "loadLink": "My Ideas"
   },
 
   "footer": {
@@ -16,10 +17,23 @@
     "rights": "All rights reserved."
   },
 
+  "load": {
+    "title": "Saved Ideas",
+    "empty": "No saved ideas yet.",
+    "untitled": "Untitled idea",
+    "updatedAtLabel": "Last updated:",
+    "loadButton": "Load",
+    "newIdea": "New Idea"
+  },
+
   "form": {
     "title": "Universal Game Design Framework",
     "description": "High-level framework for designing games before writing a GDD.",
     "placeholder": "Write here...",
+    "ideaTitleLabel": "Idea Title",
+    "ideaTitlePlaceholder": "Name this game idea...",
+    "saveButton": "Save",
+    "savedConfirmation": "Saved!",
 
     "sections": {
       "constraints": {
