@@ -1,0 +1,18 @@
+{
+  "navigation": {},
+
+  "metadata": {
+    "title": "Universal Game Design Framework",
+    "description": "A guided questionnaire to ideate a game before writing a full GDD."
+  },
+
+  "header": {
+    "languageLabel": "Language",
+    "toggleMenu": "Toggle menu"
+  },
+
+  "footer": {
+    "name": "Santiago Pintus",
+    "rights": "All rights reserved."
+  }
+}

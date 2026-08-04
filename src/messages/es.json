@@ -1,0 +1,18 @@
+{
+  "navigation": {},
+
+  "metadata": {
+    "title": "Framework Universal de Diseño de Juegos",
+    "description": "Un cuestionario guiado para idear un juego antes de escribir un GDD completo."
+  },
+
+  "header": {
+    "languageLabel": "Idioma",
+    "toggleMenu": "Abrir menú"
+  },
+
+  "footer": {
+    "name": "Santiago Pintus",
+    "rights": "Todos los derechos reservados."
+  }
+}

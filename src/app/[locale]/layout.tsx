@@ -6,14 +6,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 
 import '../globals.css';
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import { config } from '@fortawesome/fontawesome-svg-core';
-import '@/lib/fontawesome';
 import { Locales } from '@/i18n/request';
-import CursorGradient from '@/components/CursorGradient';
-
-// Prevent Font Awesome from auto-adding CSS
-config.autoAddCss = false;
 
 const openSans = Open_Sans({
   variable: '--font-open-sans',
