@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 
@@ -12,6 +12,10 @@ const mainFont = Inter({
   variable: '--primary-font',
   subsets: ['latin'],
 });
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({
   params,
@@ -40,6 +44,9 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as Locales)) {
     notFound();
   }
+
+  // Enable static rendering for this locale (no middleware at runtime for static export)
+  setRequestLocale(locale);
 
   // Providing all messages to the client side
   const messages = await getMessages();
