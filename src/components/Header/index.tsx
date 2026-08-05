@@ -8,9 +8,14 @@ export default async function Header() {
 
   return (
     <header className="bg-surface border-b border-accent-muted p-6 flex items-center justify-between">
-      <h1 className="text-2xl font-bold text-foreground">Universal Game Design Framework</h1>
+      <Link href="/">
+        <h1 className="text-2xl font-bold text-foreground">Universal Game Design Framework</h1>
+      </Link>
       <div className="flex items-center gap-4">
-        <Link href="/load" className="text-sm text-text-muted hover:text-foreground transition-colors">
+        <Link
+          href="/load"
+          className="text-sm text-text-muted hover:text-foreground transition-colors"
+        >
           {t('loadLink')}
         </Link>
         <LanguageSwitcher />
