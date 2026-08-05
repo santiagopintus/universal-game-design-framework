@@ -3,6 +3,7 @@ export interface SavedIdea {
   ideaTitle: string;
   updatedAt: string;
   values: Record<string, string>;
+  deletedAt?: string | null;
 }
 
 const STORAGE_KEY = 'ugdf.ideas.v1';
@@ -10,7 +11,8 @@ const STORAGE_KEY = 'ugdf.ideas.v1';
 export function getAllIdeas(): SavedIdea[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as SavedIdea[]) : [];
+    const ideas = raw ? (JSON.parse(raw) as SavedIdea[]) : [];
+    return ideas.map((idea) => ({ ...idea, deletedAt: idea.deletedAt ?? null }));
   } catch {
     return [];
   }
@@ -28,6 +30,23 @@ export function saveIdea(idea: SavedIdea): void {
   } else {
     ideas.push(idea);
   }
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(ideas));
+}
+
+export function softDeleteIdea(id: string): void {
+  const idea = getIdea(id);
+  if (!idea) return;
+  saveIdea({ ...idea, deletedAt: new Date().toISOString() });
+}
+
+export function restoreIdea(id: string): void {
+  const idea = getIdea(id);
+  if (!idea) return;
+  saveIdea({ ...idea, deletedAt: null });
+}
+
+export function deleteIdeaForever(id: string): void {
+  const ideas = getAllIdeas().filter((idea) => idea.id !== id);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(ideas));
 }
 

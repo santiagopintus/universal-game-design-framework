@@ -11,6 +11,9 @@
   --color-text-muted: #a0a5b5; /* Soft Gray - secondary labels/descriptions */
   --color-text: #e4e6eb; /* Off-White - primary headings/body copy */
 
+  --color-danger: #d98a8a; /* Dusty Rose - delete/danger emphasis (hover/active) */
+  --color-danger-muted: #8a5a5a; /* Muted Clay - default danger text/border */
+
   --background: var(--color-bg);
   --foreground: var(--color-text);
 }
@@ -22,6 +25,8 @@
   --color-accent: var(--color-accent);
   --color-accent-muted: var(--color-accent-muted);
   --color-text-muted: var(--color-text-muted);
+  --color-danger: var(--color-danger);
+  --color-danger-muted: var(--color-danger-muted);
   --font-sans: var(--primary-font);
   --font-heading: var(--font-bebas-neue);
 }

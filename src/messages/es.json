@@ -25,7 +25,15 @@
     "loadButton": "Cargar",
     "newIdea": "Nueva Idea",
     "importButton": "Importar",
-    "importError": "No se pudo importar ese archivo. Elegí un archivo .json de idea exportada válido."
+    "importError": "No se pudo importar ese archivo. Elegí un archivo .json de idea exportada válido.",
+    "deleteButton": "Eliminar",
+    "restoreButton": "Restaurar",
+    "deleteForeverButton": "Eliminar para siempre",
+    "deleteForeverConfirm": "¿Eliminar esta idea de forma permanente? Esta acción no se puede deshacer.",
+    "viewDeletedLink": "Ver ideas eliminadas ({count})",
+    "backToActiveLink": "Volver a ideas activas",
+    "deletedTitle": "Ideas Eliminadas",
+    "emptyDeleted": "No hay ideas eliminadas."
   },
 
   "form": {

@@ -25,7 +25,15 @@
     "loadButton": "Load",
     "newIdea": "New Idea",
     "importButton": "Import",
-    "importError": "That file couldn't be imported. Please choose a valid exported .json idea file."
+    "importError": "That file couldn't be imported. Please choose a valid exported .json idea file.",
+    "deleteButton": "Delete",
+    "restoreButton": "Restore",
+    "deleteForeverButton": "Delete Forever",
+    "deleteForeverConfirm": "Permanently delete this idea? This can't be undone.",
+    "viewDeletedLink": "See deleted ideas ({count})",
+    "backToActiveLink": "Back to active ideas",
+    "deletedTitle": "Deleted Ideas",
+    "emptyDeleted": "No deleted ideas."
   },
 
   "form": {
