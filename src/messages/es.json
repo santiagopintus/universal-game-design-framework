@@ -23,7 +23,9 @@
     "untitled": "Idea sin título",
     "updatedAtLabel": "Última actualización:",
     "loadButton": "Cargar",
-    "newIdea": "Nueva Idea"
+    "newIdea": "Nueva Idea",
+    "importButton": "Importar",
+    "importError": "No se pudo importar ese archivo. Elegí un archivo .json de idea exportada válido."
   },
 
   "form": {
@@ -34,6 +36,11 @@
     "ideaTitlePlaceholder": "Nombra esta idea de juego...",
     "saveButton": "Guardar",
     "savedConfirmation": "¡Guardado!",
+    "downloadJsonButton": "Descargar .json",
+    "downloadMdButton": "Descargar .md",
+    "downloadPdfButton": "Descargar .pdf",
+    "untitledIdea": "Idea de Juego Sin Título",
+    "noAnswer": "(Sin respuesta)",
 
     "sections": {
       "constraints": {

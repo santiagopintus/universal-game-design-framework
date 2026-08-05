@@ -23,7 +23,9 @@
     "untitled": "Untitled idea",
     "updatedAtLabel": "Last updated:",
     "loadButton": "Load",
-    "newIdea": "New Idea"
+    "newIdea": "New Idea",
+    "importButton": "Import",
+    "importError": "That file couldn't be imported. Please choose a valid exported .json idea file."
   },
 
   "form": {
@@ -34,6 +36,11 @@
     "ideaTitlePlaceholder": "Name this game idea...",
     "saveButton": "Save",
     "savedConfirmation": "Saved!",
+    "downloadJsonButton": "Download .json",
+    "downloadMdButton": "Download .md",
+    "downloadPdfButton": "Download .pdf",
+    "untitledIdea": "Untitled Game Idea",
+    "noAnswer": "(No answer provided)",
 
     "sections": {
       "constraints": {

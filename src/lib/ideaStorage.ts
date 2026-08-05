@@ -30,3 +30,47 @@ export function saveIdea(idea: SavedIdea): void {
   }
   localStorage.setItem(STORAGE_KEY, JSON.stringify(ideas));
 }
+
+export interface IdeaExport {
+  ideaTitle: string;
+  values: Record<string, string>;
+}
+
+export function parseIdeaExport(raw: string): IdeaExport | null {
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    if (
+      typeof parsed !== 'object' ||
+      parsed === null ||
+      typeof (parsed as Record<string, unknown>).values !== 'object' ||
+      (parsed as Record<string, unknown>).values === null
+    ) {
+      return null;
+    }
+
+    const { ideaTitle, values } = parsed as Record<string, unknown>;
+    const valuesRecord = values as Record<string, unknown>;
+    const cleanValues: Record<string, string> = {};
+    for (const [key, value] of Object.entries(valuesRecord)) {
+      if (typeof value === 'string') cleanValues[key] = value;
+    }
+
+    return {
+      ideaTitle: typeof ideaTitle === 'string' ? ideaTitle : '',
+      values: cleanValues,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export function importIdea(data: IdeaExport): SavedIdea {
+  const idea: SavedIdea = {
+    id: crypto.randomUUID(),
+    ideaTitle: data.ideaTitle,
+    values: data.values,
+    updatedAt: new Date().toISOString(),
+  };
+  saveIdea(idea);
+  return idea;
+}

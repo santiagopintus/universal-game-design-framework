@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { getIdea, saveIdea } from '@/lib/ideaStorage';
+import { downloadJson, downloadMarkdown, downloadPdf } from '@/lib/exportIdea';
 import Field from './Field';
 import Section from './FormSection';
 
@@ -24,6 +25,7 @@ const MainForm = () => {
     currentId: null,
   });
   const [saved, setSaved] = useState(false);
+  const [exportingPdf, setExportingPdf] = useState(false);
 
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get('id');
@@ -60,6 +62,23 @@ const MainForm = () => {
 
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
+  };
+
+  const handleDownloadMd = () => {
+    downloadMarkdown(t, formState.ideaTitle, formState.values, t('untitledIdea'), t('noAnswer'));
+  };
+
+  const handleDownloadJson = () => {
+    downloadJson(formState.ideaTitle, formState.values, t('untitledIdea'));
+  };
+
+  const handleDownloadPdf = async () => {
+    setExportingPdf(true);
+    try {
+      await downloadPdf(t, formState.ideaTitle, formState.values, t('untitledIdea'), t('noAnswer'));
+    } finally {
+      setExportingPdf(false);
+    }
   };
 
   return (
@@ -454,6 +473,28 @@ const MainForm = () => {
             {t('savedConfirmation')}
           </span>
         )}
+        <button
+          type="button"
+          onClick={handleDownloadJson}
+          className="cursor-pointer px-4 py-3 rounded-lg bg-surface border border-accent-muted text-foreground font-medium shadow-lg hover:border-accent transition-colors"
+        >
+          {t('downloadJsonButton')}
+        </button>
+        <button
+          type="button"
+          onClick={handleDownloadMd}
+          className="cursor-pointer px-4 py-3 rounded-lg bg-surface border border-accent-muted text-foreground font-medium shadow-lg hover:border-accent transition-colors"
+        >
+          {t('downloadMdButton')}
+        </button>
+        <button
+          type="button"
+          onClick={handleDownloadPdf}
+          disabled={exportingPdf}
+          className="cursor-pointer px-4 py-3 rounded-lg bg-surface border border-accent-muted text-foreground font-medium shadow-lg hover:border-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {t('downloadPdfButton')}
+        </button>
         <button
           type="button"
           onClick={handleSave}

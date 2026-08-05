@@ -4,7 +4,7 @@
 
 [] Auto-save to localStorage
 
-[] Markdown export
+[X] Markdown export
 
 [] JSON export/import
 
