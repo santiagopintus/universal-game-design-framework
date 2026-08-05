@@ -1,4 +1,4 @@
-[] Left navigation sidebar with section progress
+[X] Left navigation sidebar with section progress
 
 [] Collapsible sections
 

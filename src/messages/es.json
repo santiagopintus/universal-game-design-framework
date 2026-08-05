@@ -42,6 +42,12 @@
     "untitledIdea": "Idea de Juego Sin Título",
     "noAnswer": "(Sin respuesta)",
 
+    "sidebar": {
+      "heading": "Secciones",
+      "toggleLabel": "Abrir navegación de secciones",
+      "closeLabel": "Cerrar navegación de secciones"
+    },
+
     "sections": {
       "constraints": {
         "title": "1. Restricciones del Proyecto",

@@ -42,6 +42,12 @@
     "untitledIdea": "Untitled Game Idea",
     "noAnswer": "(No answer provided)",
 
+    "sidebar": {
+      "heading": "Sections",
+      "toggleLabel": "Open section navigation",
+      "closeLabel": "Close section navigation"
+    },
+
     "sections": {
       "constraints": {
         "title": "1. Project Constraints",
