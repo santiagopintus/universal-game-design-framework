@@ -65,7 +65,7 @@ const LoadScreen = () => {
   };
 
   return (
-    <main className="max-w-5xl mx-auto p-8 space-y-8">
+    <main className="max-w-5xl mx-auto px-4 py-8 space-y-8">
       <div className="flex items-center justify-between mb-2">
         <h1 className="text-4xl font-bold text-foreground">{t('title')}</h1>
         <div className="flex items-center gap-3">
