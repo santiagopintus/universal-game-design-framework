@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { getIdea, saveIdea } from '@/lib/ideaStorage';
@@ -27,6 +27,9 @@ const MainForm = () => {
   });
   const [saved, setSaved] = useState(false);
   const [exportingPdf, setExportingPdf] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get('id');
@@ -37,6 +40,19 @@ const MainForm = () => {
 
     setFormState({ ideaTitle: idea.ideaTitle, values: idea.values, currentId: idea.id });
   }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [menuOpen]);
 
   const setIdeaTitle = (ideaTitle: string) => setFormState((prev) => ({ ...prev, ideaTitle }));
 
@@ -65,6 +81,21 @@ const MainForm = () => {
     setTimeout(() => setSaved(false), 2000);
   };
 
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    const isEmpty =
+      !formState.ideaTitle.trim() && Object.values(formState.values).every((v) => !v.trim());
+    if (isEmpty) return;
+
+    const timeout = setTimeout(() => handleSave(), 5000);
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formState.values, formState.ideaTitle]);
+
   const handleDownloadMd = () => {
     downloadMarkdown(t, formState.ideaTitle, formState.values, t('untitledIdea'), t('noAnswer'));
   };
@@ -85,8 +116,8 @@ const MainForm = () => {
   return (
     <div className="max-w-7xl mx-auto md:flex md:items-start md:gap-8 px-4 md:px-8">
       <Sidebar values={formState.values} />
-      <main className="md:w-[60%] mx-auto p-8 pb-28 space-y-8">
-        <h1 className="text-4xl font-bold mb-2 text-foreground">{t('title')}</h1>
+      <main className="md:w-[60%] mx-auto py-8 pb-28 space-y-8">
+        <h1 className="text-2xl font-bold mb-2 text-foreground min-[850px]:hidden">{t('title')}</h1>
         <p className="text-text-muted mb-8">{t('description')}</p>
 
         <div className="mb-6">
@@ -470,41 +501,81 @@ const MainForm = () => {
           />
         </Section>
 
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2">
           {saved && (
             <span className="px-3 py-1.5 rounded-md bg-surface border border-accent-muted text-accent text-sm shadow-sm">
               {t('savedConfirmation')}
             </span>
           )}
-          <button
-            type="button"
-            onClick={handleDownloadJson}
-            className="cursor-pointer px-4 py-3 rounded-lg bg-surface border border-accent-muted text-foreground font-medium shadow-lg hover:border-accent transition-colors"
-          >
-            {t('downloadJsonButton')}
-          </button>
-          <button
-            type="button"
-            onClick={handleDownloadMd}
-            className="cursor-pointer px-4 py-3 rounded-lg bg-surface border border-accent-muted text-foreground font-medium shadow-lg hover:border-accent transition-colors"
-          >
-            {t('downloadMdButton')}
-          </button>
-          <button
-            type="button"
-            onClick={handleDownloadPdf}
-            disabled={exportingPdf}
-            className="cursor-pointer px-4 py-3 rounded-lg bg-surface border border-accent-muted text-foreground font-medium shadow-lg hover:border-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {t('downloadPdfButton')}
-          </button>
-          <button
-            type="button"
-            onClick={handleSave}
-            className="cursor-pointer px-6 py-3 rounded-lg bg-accent text-background font-medium shadow-lg hover:opacity-90 transition-opacity"
-          >
-            {t('saveButton')}
-          </button>
+          <div ref={menuRef} className="relative">
+            {menuOpen && (
+              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex flex-col gap-2 bg-surface border border-accent-muted rounded-lg p-2 shadow-lg w-max">
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleDownloadJson();
+                    setMenuOpen(false);
+                  }}
+                  className="cursor-pointer px-4 py-2 rounded-md text-foreground font-medium hover:bg-accent-muted/20 transition-colors text-left"
+                >
+                  {t('downloadJsonButton')}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleDownloadMd();
+                    setMenuOpen(false);
+                  }}
+                  className="cursor-pointer px-4 py-2 rounded-md text-foreground font-medium hover:bg-accent-muted/20 transition-colors text-left"
+                >
+                  {t('downloadMdButton')}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleDownloadPdf();
+                    setMenuOpen(false);
+                  }}
+                  disabled={exportingPdf}
+                  className="cursor-pointer px-4 py-2 rounded-md text-foreground font-medium hover:bg-accent-muted/20 transition-colors text-left disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {t('downloadPdfButton')}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleSave();
+                    setMenuOpen(false);
+                  }}
+                  className="cursor-pointer px-4 py-2 rounded-md text-foreground font-medium hover:bg-accent-muted/20 transition-colors text-left"
+                >
+                  {t('saveButton')}
+                </button>
+              </div>
+            )}
+            <button
+              type="button"
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-expanded={menuOpen}
+              className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-lg bg-accent text-background font-medium shadow-lg hover:opacity-90 transition-opacity"
+            >
+              {t('exportMenuButton')}
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`transition-transform ${menuOpen ? '' : 'rotate-180'}`}
+                aria-hidden="true"
+              >
+                <path d="M2 4l4 4 4-4" />
+              </svg>
+            </button>
+          </div>
         </div>
       </main>
     </div>

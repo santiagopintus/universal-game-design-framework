@@ -44,6 +44,7 @@
     "ideaTitlePlaceholder": "Name this game idea...",
     "saveButton": "Save",
     "savedConfirmation": "Saved!",
+    "exportMenuButton": "Export",
     "downloadJsonButton": "Download .json",
     "downloadMdButton": "Download .md",
     "downloadPdfButton": "Download .pdf",

@@ -1,0 +1,400 @@
+{
+  "ideaTitle": "Spook Squad",
+  "sections": [
+    {
+      "title": "1. Project Constraints",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "constraints.budget",
+              "title": "Budget",
+              "guide": "What budget constraints should influence the design?",
+              "answer": "$0 cash budget. Every asset - 3D models, textures, SFX, and music - will be made in-house using free/open tools (Blender, a free DAW like LMMS or Reaper's discounted license, Audacity for SFX foley). No paid marketplace assets, no contracted work. The only real 'spend' is time and the platform's revenue-share cut, so every system must be cheap to build and cheap to iterate on."
+            },
+            {
+              "valueKey": "constraints.teamSize",
+              "title": "Team Size",
+              "guide": "Who is building this game? What skills are available?",
+              "answer": "Solo developer (or a 2-person team at most) wearing every hat: programming, low-poly modeling/animation, sound design, and self-composed music. This dictates every other constraint below - systems must be simple enough for one person to build, debug, and stabilize multiplayer netcode for within a 4-month production window."
+            },
+            {
+              "valueKey": "constraints.technology",
+              "title": "Technology",
+              "guide": "What engine, tools, or physical components will be used?",
+              "answer": "Unity (free tier, huge solo-dev tutorial base) with Netcode for GameObjects or Photon Fusion for networking, plus Steamworks.NET for lobbies/achievements. Proximity voice chat via a lightweight Photon Voice/Vivox integration - no custom voice tech needed. A low-poly, toon-shaded art pipeline (Blender to Unity) keeps asset creation fast for one person doing everything."
+            },
+            {
+              "valueKey": "constraints.productionScope",
+              "title": "Production Scope",
+              "guide": "How ambitious should this project be? What should intentionally remain out of scope?",
+              "answer": "Deliberately narrow: one mansion 'hub' built from a modular, shuffle-able room kit (so 20-30 rooms read as far more content than they are), 5-6 ghost archetypes, and one capture tool with 2-3 unlockable upgrades, polished to death rather than many shallow systems. Explicitly out of scope for launch: multiple maps, branching narrative, ranked/competitive modes, complex AI pathfinding beyond simple state machines, and couch co-op. Online-only, one map, tight loop - the same lean scope that let Meccha Chameleon ship in two months and RV There Yet? grow out of a game jam."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. Game Concept",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "concept.pitch",
+              "title": "One-Sentence Pitch",
+              "guide": "Describe the game in one sentence.",
+              "answer": "A crew of dorky, underfunded ghost hunters has to corner, trap, and haul off escalating ghosts in a haunted mansion before their gear - and their nerve - runs out."
+            },
+            {
+              "valueKey": "concept.summary",
+              "title": "Concept Summary",
+              "guide": "What is the core idea? Why does this game exist?",
+              "answer": "This game exists to be the thing your Discord group screams through together: not real horror, but the thrill of horror with the safety net of comedy, riding the same 'friendslop' wave as R.E.P.O., RV There Yet?, Peak, and Schedule I. Players are a scrappy paranormal-removal crew exploring a mansion that gets reshuffled every run, tracking clues to find ghosts, then chasing them down with clunky, low-battery capture tools. The tension isn't 'will I get scared' - it's 'will we run out of ammo before we run out of ghost.' That fear is mechanical and shared, not atmospheric and solitary, which is exactly why it's fun to yell about with friends instead of dreading alone in the dark."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. MDA Framework",
+      "groups": [
+        {
+          "heading": "Aesthetics",
+          "fields": [
+            {
+              "valueKey": "mda.aesthetics.emotionalExperience",
+              "title": "Emotional Experience",
+              "guide": "What emotions should players feel?",
+              "answer": "Escalating panic that tips over into laughter - thrilled, chaotic, occasionally desperate, but never genuinely scared. The target is exactly the moment described in the design brief: sprinting and screaming and half-laughing while a battery indicator blinks red."
+            },
+            {
+              "valueKey": "mda.aesthetics.playerFantasy",
+              "title": "Player Fantasy",
+              "guide": "Who does the player become?",
+              "answer": "A broke, under-equipped ghost hunter - more 'temp agency sent us out with duct-taped gear' than elite paranormal SWAT team. Competence is earned through teamwork and panic-management, not by starting powerful."
+            },
+            {
+              "valueKey": "mda.aesthetics.desiredExperience",
+              "title": "Desired Experience",
+              "guide": "How should players describe the game after playing?",
+              "answer": "'We almost died and it was hilarious, let's queue one more.' The same post-session energy people report from R.E.P.O. and RV There Yet? - the story of the run, not the run itself, is what gets replayed in chat afterward."
+            },
+            {
+              "valueKey": "mda.aesthetics.memorableMoments",
+              "title": "Memorable Moments",
+              "guide": "What moments should players remember?",
+              "answer": "The battery-run-out sprint to a safe room while a large ghost bears down on the whole team, everyone screaming and laughing at once; a rookie accidentally releasing a trapped ghost mid-carry; the first time a team pulls off a coordinated pincer capture on a fast ghost and it actually works."
+            }
+          ]
+        },
+        {
+          "heading": "Mechanics",
+          "fields": [
+            {
+              "valueKey": "mda.mechanics.coreMechanics",
+              "title": "Core Mechanics",
+              "guide": "What are the primary actions?",
+              "answer": "Investigate (find clues, identify the ghost type), track (follow behavior and noise cues), engage (corner and weaken the ghost with the capture tool), trap (a short timing/struggle mini-game), and extract (physically carry the trapped ghost - which slows you and blocks other tool use - back to the van)."
+            },
+            {
+              "valueKey": "mda.mechanics.resources",
+              "title": "Resources",
+              "guide": "What resources are managed?",
+              "answer": "The capture tool's battery/ammo (drains fast, forces retreats to recharge stations), a handheld light source with its own limited charge, team cash earned per successful capture/extraction, and physical inventory - carrying a trapped ghost takes both hands."
+            },
+            {
+              "valueKey": "mda.mechanics.rules",
+              "title": "Rules",
+              "guide": "What fundamental rules define the game?",
+              "answer": "Ghosts escalate in aggression the longer and louder the team lingers in their territory. A captured ghost isn't secured until it's physically extracted to the van - drop it and it can break free. Any player can be 'spooked' (ragdolled, not killed) and needs a nearby teammate to revive them."
+            },
+            {
+              "valueKey": "mda.mechanics.progressionSystems",
+              "title": "Progression Systems",
+              "guide": "How does the player become more capable?",
+              "answer": "Cash from successful contracts buys tool upgrades (bigger battery, faster recharge, wider stun radius), mansion-wing unlocks, and cosmetic hunter gear. A meta layer of 'contracts' gates progressively tougher ghost combinations and larger shuffled mansion layouts."
+            }
+          ]
+        },
+        {
+          "heading": "Dynamics",
+          "fields": [
+            {
+              "valueKey": "mda.dynamics.playerBehaviors",
+              "title": "Player Behaviors",
+              "guide": "What behaviors should emerge?",
+              "answer": "Splitting up then frantically regrouping, panicked callouts ('IT'S BEHIND YOU'), triaging who gets rescued first when multiple players are down, and the classic friend-slop move of accidentally sacrificing a teammate's escape route to save your own."
+            },
+            {
+              "valueKey": "mda.dynamics.decisionMaking",
+              "title": "Decision Making",
+              "guide": "What meaningful choices recur?",
+              "answer": "Fight this ghost now on low battery, or retreat and risk the contract timer. Go back for a downed teammate, or protect the trapped ghost you're already hauling. Spend cash on a safer tool upgrade, or a riskier high-value unlock."
+            },
+            {
+              "valueKey": "mda.dynamics.riskVsReward",
+              "title": "Risk vs Reward",
+              "guide": "How is strategic thinking encouraged?",
+              "answer": "Pushing into a newly unlocked, unexplored mansion wing yields rarer, higher-payout ghosts but with no memorized escape routes. Holding a full battery in reserve is safe but slows down how fast the team can complete the contract."
+            },
+            {
+              "valueKey": "mda.dynamics.socialDynamics",
+              "title": "Social Dynamics",
+              "guide": "How do players cooperate or compete?",
+              "answer": "Proximity voice chat (in the spirit of R.E.P.O.) makes panic audible and contagious in a good way. Captures above a certain ghost tier require two or more players physically coordinating - one distracts, one traps - which forces real communication instead of solo heroics."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "4. Setting",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "setting.world",
+              "title": "World",
+              "guide": "Where does the game take place?",
+              "answer": "A single sprawling, slightly-too-big Victorian mansion, procedurally reshuffled between runs from a kit of modular rooms, so it always feels navigable but is never fully memorized."
+            },
+            {
+              "valueKey": "setting.theme",
+              "title": "Theme",
+              "guide": "What is the tone and atmosphere?",
+              "answer": "Halloween-cartoon, not horror-movie - closer to Luigi's Mansion than Phasmophobia: creaky, purple-lit, cobweb-y, played for spooky fun rather than dread, with expressive, dorky ghost designs and slapstick animation undercutting any real scares."
+            },
+            {
+              "valueKey": "setting.environmentalStorytelling",
+              "title": "Environmental Storytelling",
+              "guide": "How does the world communicate its history and mood?",
+              "answer": "Each ghost's 'lair' room is themed and prop-dressed around a goofy backstory hint - a ghost obsessed with bowling gets a trophy shrine, a ghost that died mid-diet haunts the pantry - letting environment art carry comedic character without any voiced dialogue or cutscenes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5. Game Loop",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "gameLoop.coreLoop",
+              "title": "Core Loop",
+              "guide": "What actions repeat throughout the game?",
+              "answer": "Enter the mansion, investigate rooms for ghost clues, track and corner a ghost, weaken and trap it, haul it (encumbered) back to the van, repeat until quota is met, then extract before the timer or ghost escalation overwhelms the team."
+            },
+            {
+              "valueKey": "gameLoop.sessionFlow",
+              "title": "Session Flow",
+              "guide": "What does a typical play session look like?",
+              "answer": "A single contract run takes roughly 12-20 minutes: a brief loadout/prep phase at the van, the mansion run itself, then a cash-out and shopping phase before queuing the next, harder contract - short enough for 'one more,' long enough to build real tension."
+            },
+            {
+              "valueKey": "gameLoop.longTermProgression",
+              "title": "Long-Term Progression",
+              "guide": "What keeps players engaged across sessions?",
+              "answer": "Unlocking new mansion wings, tougher ghost tiers, tool upgrades, and cosmetics - a 'contract ladder' that keeps runs feeling different even though it's one map and one core loop."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "6. Player Goals",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "playerGoals.shortTerm",
+              "title": "Short-Term Goals",
+              "guide": "What should players accomplish in the next few minutes?",
+              "answer": "Survive the current ghost encounter, manage battery and light charge, and don't drop a captured ghost mid-carry."
+            },
+            {
+              "valueKey": "playerGoals.midTerm",
+              "title": "Mid-Term Goals",
+              "guide": "What should players work toward over several sessions?",
+              "answer": "Hit the capture quota and get the whole team - plus their catches - to the van before the contract timer or a roaming hazard event ends the run."
+            },
+            {
+              "valueKey": "playerGoals.longTerm",
+              "title": "Long-Term Goals",
+              "guide": "What ultimate objectives motivate continued play?",
+              "answer": "Fully upgrade the crew's gear and mansion access, and eventually take down every ghost archetype, including a rare high-tier ghost that only falls to a fully coordinated team."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "7. Victory & Failure Conditions",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "victoryFailure.victoryConditions",
+              "title": "Victory Conditions",
+              "guide": "How does the player win? Are there multiple paths?",
+              "answer": "Meet or beat the contract's ghost-capture quota and get the whole team, plus their captured ghosts, to the van before time runs out. Multiple paths work: chase a few high-value tough ghosts, or grind out many easy low-value ones."
+            },
+            {
+              "valueKey": "victoryFailure.failureConditions",
+              "title": "Failure Conditions",
+              "guide": "How can the player fail? What are the consequences?",
+              "answer": "The contract timer expires without quota met, or the entire team ends up 'spooked' at once with no one left to revive anyone. Failure costs most of that run's potential earnings but never erases permanent unlocks, so a bad run stings without ending progress."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "8. Difficulty & Progression",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "difficulty.learningCurve",
+              "title": "Learning Curve",
+              "guide": "How are mechanics introduced?",
+              "answer": "A near-mandatory first contract against the single weakest, slowest, least aggressive ghost teaches investigate-trap-extract with almost no fail state, before any battery-management pressure gets introduced."
+            },
+            {
+              "valueKey": "difficulty.difficultyCurve",
+              "title": "Difficulty Curve",
+              "guide": "How does challenge increase?",
+              "answer": "Each contract tier adds one new pressure at a time - a tougher ghost archetype, a shorter timer, a bigger shuffled mansion, or a roaming hazard - stacking difficulty gradually instead of all at once."
+            },
+            {
+              "valueKey": "difficulty.mastery",
+              "title": "Mastery",
+              "guide": "How can experienced players continue improving?",
+              "answer": "Experienced teams learn to read ghost behavior tells (predicting instead of reacting), optimize battery/ammo economy to skip unnecessary recharge trips, and run tight two-person pincer captures on fast or aggressive ghosts instead of chasing solo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "9. Replayability",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "replayability.replayValue",
+              "title": "Replay Value",
+              "guide": "Why play again?",
+              "answer": "A procedurally shuffled mansion, randomized ghost spawn combinations, an escalating contract ladder, and a gear/cosmetic unlock treadmill all push toward 'one more run' - while the core appeal, chaotic screamable co-op moments, regenerates naturally every session regardless of layout."
+            },
+            {
+              "valueKey": "replayability.variability",
+              "title": "Variability",
+              "guide": "What changes between playthroughs?",
+              "answer": "Room layout, which ghosts spawn together, occasional random hazard events (a power outage that kills every flashlight at once, a roaming non-objective 'big ghost' that can end a run if it catches the whole team), and, honestly, each group's own mistakes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "10. Core Design Principles",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "principles.principle1",
+              "title": "Principle 1",
+              "guide": "What rule should always be followed?",
+              "answer": "Chaos is the content: every system should be built to generate emergent, screamable, clip-worthy moments over scripted precision or 'fair' encounter design."
+            },
+            {
+              "valueKey": "principles.principle2",
+              "title": "Principle 2",
+              "guide": "What should always be prioritized?",
+              "answer": "Players' ability to hear and react to teammates. Readability and communication in first-person, voice-chat chaos beat visual fidelity or system complexity every time."
+            },
+            {
+              "valueKey": "principles.principle3",
+              "title": "Principle 3",
+              "guide": "What question should designers constantly ask?",
+              "answer": "Would this moment make a group of friends scream and laugh at the same time? If a feature doesn't serve that, cut it."
+            },
+            {
+              "valueKey": "principles.tradeoffs",
+              "title": "Trade-offs",
+              "guide": "How should conflicts between good design options be resolved?",
+              "answer": "When realism or 'true horror' tension conflicts with the dorky, fun tone, fun wins. When feature depth conflicts with the 4-month solo-dev production window, scope gets cut - never the polish on the core loop."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "11. Success Criteria",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "successCriteria.playerExperience",
+              "title": "Player Experience",
+              "guide": "What should playtesters consistently feel or say?",
+              "answer": "Playtesters laugh and yell mid-session, and unprompted, ask to queue another contract right after a run ends."
+            },
+            {
+              "valueKey": "successCriteria.gameplay",
+              "title": "Gameplay",
+              "guide": "What behaviors indicate the mechanics are working?",
+              "answer": "Groups naturally start rationing battery/ammo, calling out ghost positions, and coordinating two-person captures without being explicitly taught to - evidence the core loop teaches itself."
+            },
+            {
+              "valueKey": "successCriteria.designGoals",
+              "title": "Design Goals",
+              "guide": "What observable outcomes define success?",
+              "answer": "Runs regularly produce a clippable 'oh no' moment - like the battery-run-out chase from the design brief - that players share unprompted, the same organic word-of-mouth that drove Meccha Chameleon and RV There Yet?."
+            },
+            {
+              "valueKey": "successCriteria.redFlags",
+              "title": "Red Flags",
+              "guide": "What indicates the design is failing?",
+              "answer": "Playtesters describe the game as 'stressful' or 'scary' rather than 'fun-panicked'; voice chat goes quiet instead of chaotic during runs; sessions feel same-y by the third playthrough; failure states produce frustration instead of laughter."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "12. Design Pillars",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "pillars.pillar1",
+              "title": "Pillar 1",
+              "guide": "What is the most important aspect of this game?",
+              "answer": "Screamable Co-op Chaos - every core system exists to produce shared, thrilling panic, like the battery-run-out escape scenario in the design brief."
+            },
+            {
+              "valueKey": "pillars.pillar2",
+              "title": "Pillar 2",
+              "guide": "What makes this game unique?",
+              "answer": "Dorky, Not Horror - a spooky aesthetic and real mechanical tension, paired with cartoon ghost designs and slapstick animation. The scare is systemic pressure, never gore or jump-scare dread."
+            },
+            {
+              "valueKey": "pillars.pillar3",
+              "title": "Pillar 3",
+              "guide": "What experience must never be compromised?",
+              "answer": "Small Scope, Big Moments - one tightly-crafted, replayable mansion and loop, built to be finishable and genuinely polished by a solo/small team within 6 months."
+            },
+            {
+              "valueKey": "pillars.neverBecome",
+              "title": "Things This Game Should Never Become",
+              "guide": "What directions would betray the game's identity?",
+              "answer": "A true horror/jump-scare game, a grindy loot-treadmill sim that needs a wiki to understand, or a game where quiet solo play is viable - if it stops requiring loud teamwork, it's stopped being this game."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
