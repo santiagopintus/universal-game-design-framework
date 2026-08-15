@@ -55,24 +55,51 @@ export interface IdeaExport {
   values: Record<string, string>;
 }
 
+function extractValuesFromSections(sections: unknown): Record<string, string> | null {
+  if (!Array.isArray(sections)) return null;
+
+  const cleanValues: Record<string, string> = {};
+  for (const section of sections) {
+    if (typeof section !== 'object' || section === null) return null;
+    const groups = (section as Record<string, unknown>).groups;
+    if (!Array.isArray(groups)) return null;
+
+    for (const group of groups) {
+      if (typeof group !== 'object' || group === null) return null;
+      const fields = (group as Record<string, unknown>).fields;
+      if (!Array.isArray(fields)) return null;
+
+      for (const field of fields) {
+        if (typeof field !== 'object' || field === null) return null;
+        const { valueKey, answer } = field as Record<string, unknown>;
+        if (typeof valueKey !== 'string') return null;
+        if (typeof answer === 'string' && answer !== '') cleanValues[valueKey] = answer;
+      }
+    }
+  }
+
+  return cleanValues;
+}
+
 export function parseIdeaExport(raw: string): IdeaExport | null {
   try {
     const parsed: unknown = JSON.parse(raw);
-    if (
-      typeof parsed !== 'object' ||
-      parsed === null ||
-      typeof (parsed as Record<string, unknown>).values !== 'object' ||
-      (parsed as Record<string, unknown>).values === null
-    ) {
-      return null;
+    if (typeof parsed !== 'object' || parsed === null) return null;
+
+    const { ideaTitle, values, sections } = parsed as Record<string, unknown>;
+
+    let cleanValues: Record<string, string> | null = null;
+
+    if (typeof values === 'object' && values !== null) {
+      cleanValues = {};
+      for (const [key, value] of Object.entries(values as Record<string, unknown>)) {
+        if (typeof value === 'string') cleanValues[key] = value;
+      }
+    } else if (sections !== undefined) {
+      cleanValues = extractValuesFromSections(sections);
     }
 
-    const { ideaTitle, values } = parsed as Record<string, unknown>;
-    const valuesRecord = values as Record<string, unknown>;
-    const cleanValues: Record<string, string> = {};
-    for (const [key, value] of Object.entries(valuesRecord)) {
-      if (typeof value === 'string') cleanValues[key] = value;
-    }
+    if (cleanValues === null) return null;
 
     return {
       ideaTitle: typeof ideaTitle === 'string' ? ideaTitle : '',

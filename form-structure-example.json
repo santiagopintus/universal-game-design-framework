@@ -1,0 +1,400 @@
+{
+  "ideaTitle": "Untitled Game Idea",
+  "sections": [
+    {
+      "title": "1. Project Constraints",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "constraints.budget",
+              "title": "Budget",
+              "guide": "What budget constraints should influence the design?",
+              "answer": ""
+            },
+            {
+              "valueKey": "constraints.teamSize",
+              "title": "Team Size",
+              "guide": "Who is building this game? What skills are available?",
+              "answer": ""
+            },
+            {
+              "valueKey": "constraints.technology",
+              "title": "Technology",
+              "guide": "What engine, tools, or physical components will be used?",
+              "answer": ""
+            },
+            {
+              "valueKey": "constraints.productionScope",
+              "title": "Production Scope",
+              "guide": "How ambitious should this project be? What should intentionally remain out of scope?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. Game Concept",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "concept.pitch",
+              "title": "One-Sentence Pitch",
+              "guide": "Describe the game in one sentence.",
+              "answer": ""
+            },
+            {
+              "valueKey": "concept.summary",
+              "title": "Concept Summary",
+              "guide": "What is the core idea? Why does this game exist?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. MDA Framework",
+      "groups": [
+        {
+          "heading": "Aesthetics",
+          "fields": [
+            {
+              "valueKey": "mda.aesthetics.emotionalExperience",
+              "title": "Emotional Experience",
+              "guide": "What emotions should players feel?",
+              "answer": ""
+            },
+            {
+              "valueKey": "mda.aesthetics.playerFantasy",
+              "title": "Player Fantasy",
+              "guide": "Who does the player become?",
+              "answer": ""
+            },
+            {
+              "valueKey": "mda.aesthetics.desiredExperience",
+              "title": "Desired Experience",
+              "guide": "How should players describe the game after playing?",
+              "answer": ""
+            },
+            {
+              "valueKey": "mda.aesthetics.memorableMoments",
+              "title": "Memorable Moments",
+              "guide": "What moments should players remember?",
+              "answer": ""
+            }
+          ]
+        },
+        {
+          "heading": "Mechanics",
+          "fields": [
+            {
+              "valueKey": "mda.mechanics.coreMechanics",
+              "title": "Core Mechanics",
+              "guide": "What are the primary actions?",
+              "answer": ""
+            },
+            {
+              "valueKey": "mda.mechanics.resources",
+              "title": "Resources",
+              "guide": "What resources are managed?",
+              "answer": ""
+            },
+            {
+              "valueKey": "mda.mechanics.rules",
+              "title": "Rules",
+              "guide": "What fundamental rules define the game?",
+              "answer": ""
+            },
+            {
+              "valueKey": "mda.mechanics.progressionSystems",
+              "title": "Progression Systems",
+              "guide": "How does the player become more capable?",
+              "answer": ""
+            }
+          ]
+        },
+        {
+          "heading": "Dynamics",
+          "fields": [
+            {
+              "valueKey": "mda.dynamics.playerBehaviors",
+              "title": "Player Behaviors",
+              "guide": "What behaviors should emerge?",
+              "answer": ""
+            },
+            {
+              "valueKey": "mda.dynamics.decisionMaking",
+              "title": "Decision Making",
+              "guide": "What meaningful choices recur?",
+              "answer": ""
+            },
+            {
+              "valueKey": "mda.dynamics.riskVsReward",
+              "title": "Risk vs Reward",
+              "guide": "How is strategic thinking encouraged?",
+              "answer": ""
+            },
+            {
+              "valueKey": "mda.dynamics.socialDynamics",
+              "title": "Social Dynamics",
+              "guide": "How do players cooperate or compete?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "4. Setting",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "setting.world",
+              "title": "World",
+              "guide": "Where does the game take place?",
+              "answer": ""
+            },
+            {
+              "valueKey": "setting.theme",
+              "title": "Theme",
+              "guide": "What is the tone and atmosphere?",
+              "answer": ""
+            },
+            {
+              "valueKey": "setting.environmentalStorytelling",
+              "title": "Environmental Storytelling",
+              "guide": "How does the world communicate its history and mood?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5. Game Loop",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "gameLoop.coreLoop",
+              "title": "Core Loop",
+              "guide": "What actions repeat throughout the game?",
+              "answer": ""
+            },
+            {
+              "valueKey": "gameLoop.sessionFlow",
+              "title": "Session Flow",
+              "guide": "What does a typical play session look like?",
+              "answer": ""
+            },
+            {
+              "valueKey": "gameLoop.longTermProgression",
+              "title": "Long-Term Progression",
+              "guide": "What keeps players engaged across sessions?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "6. Player Goals",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "playerGoals.shortTerm",
+              "title": "Short-Term Goals",
+              "guide": "What should players accomplish in the next few minutes?",
+              "answer": ""
+            },
+            {
+              "valueKey": "playerGoals.midTerm",
+              "title": "Mid-Term Goals",
+              "guide": "What should players work toward over several sessions?",
+              "answer": ""
+            },
+            {
+              "valueKey": "playerGoals.longTerm",
+              "title": "Long-Term Goals",
+              "guide": "What ultimate objectives motivate continued play?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "7. Victory & Failure Conditions",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "victoryFailure.victoryConditions",
+              "title": "Victory Conditions",
+              "guide": "How does the player win? Are there multiple paths?",
+              "answer": ""
+            },
+            {
+              "valueKey": "victoryFailure.failureConditions",
+              "title": "Failure Conditions",
+              "guide": "How can the player fail? What are the consequences?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "8. Difficulty & Progression",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "difficulty.learningCurve",
+              "title": "Learning Curve",
+              "guide": "How are mechanics introduced?",
+              "answer": ""
+            },
+            {
+              "valueKey": "difficulty.difficultyCurve",
+              "title": "Difficulty Curve",
+              "guide": "How does challenge increase?",
+              "answer": ""
+            },
+            {
+              "valueKey": "difficulty.mastery",
+              "title": "Mastery",
+              "guide": "How can experienced players continue improving?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "9. Replayability",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "replayability.replayValue",
+              "title": "Replay Value",
+              "guide": "Why play again?",
+              "answer": ""
+            },
+            {
+              "valueKey": "replayability.variability",
+              "title": "Variability",
+              "guide": "What changes between playthroughs?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "10. Core Design Principles",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "principles.principle1",
+              "title": "Principle 1",
+              "guide": "What rule should always be followed?",
+              "answer": ""
+            },
+            {
+              "valueKey": "principles.principle2",
+              "title": "Principle 2",
+              "guide": "What should always be prioritized?",
+              "answer": ""
+            },
+            {
+              "valueKey": "principles.principle3",
+              "title": "Principle 3",
+              "guide": "What question should designers constantly ask?",
+              "answer": ""
+            },
+            {
+              "valueKey": "principles.tradeoffs",
+              "title": "Trade-offs",
+              "guide": "How should conflicts between good design options be resolved?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "11. Success Criteria",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "successCriteria.playerExperience",
+              "title": "Player Experience",
+              "guide": "What should playtesters consistently feel or say?",
+              "answer": ""
+            },
+            {
+              "valueKey": "successCriteria.gameplay",
+              "title": "Gameplay",
+              "guide": "What behaviors indicate the mechanics are working?",
+              "answer": ""
+            },
+            {
+              "valueKey": "successCriteria.designGoals",
+              "title": "Design Goals",
+              "guide": "What observable outcomes define success?",
+              "answer": ""
+            },
+            {
+              "valueKey": "successCriteria.redFlags",
+              "title": "Red Flags",
+              "guide": "What indicates the design is failing?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "12. Design Pillars",
+      "groups": [
+        {
+          "fields": [
+            {
+              "valueKey": "pillars.pillar1",
+              "title": "Pillar 1",
+              "guide": "What is the most important aspect of this game?",
+              "answer": ""
+            },
+            {
+              "valueKey": "pillars.pillar2",
+              "title": "Pillar 2",
+              "guide": "What makes this game unique?",
+              "answer": ""
+            },
+            {
+              "valueKey": "pillars.pillar3",
+              "title": "Pillar 3",
+              "guide": "What experience must never be compromised?",
+              "answer": ""
+            },
+            {
+              "valueKey": "pillars.neverBecome",
+              "title": "Things This Game Should Never Become",
+              "guide": "What directions would betray the game's identity?",
+              "answer": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

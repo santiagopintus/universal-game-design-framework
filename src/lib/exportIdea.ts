@@ -59,12 +59,40 @@ export function downloadMarkdown(
   triggerDownload(blob, `${slugifyFilename(ideaTitle, untitledLabel)}.md`);
 }
 
+type JsonField = { valueKey: string; title: string; guide: string; answer: string };
+type JsonGroup = { heading?: string; fields: JsonField[] };
+type JsonSection = { title: string; groups: JsonGroup[] };
+
+function buildJsonData(
+  t: Translate,
+  ideaTitle: string,
+  values: Record<string, string>,
+  untitledLabel: string,
+): { ideaTitle: string; sections: JsonSection[] } {
+  const sections: JsonSection[] = FORM_SCHEMA.map((section) => ({
+    title: t(section.titleKey),
+    groups: section.groups.map((group) => ({
+      ...(group.headingKey ? { heading: t(group.headingKey) } : {}),
+      fields: group.fields.map((field) => ({
+        valueKey: field.valueKey,
+        title: t(field.titleKey),
+        guide: t(field.guideKey),
+        answer: values[field.valueKey]?.trim() ?? '',
+      })),
+    })),
+  }));
+
+  return { ideaTitle: ideaTitle.trim() || untitledLabel, sections };
+}
+
 export function downloadJson(
+  t: Translate,
   ideaTitle: string,
   values: Record<string, string>,
   untitledLabel: string,
 ): void {
-  const json = JSON.stringify({ ideaTitle, values }, null, 2);
+  const data = buildJsonData(t, ideaTitle, values, untitledLabel);
+  const json = JSON.stringify(data, null, 2);
   const blob = new Blob([json], { type: 'application/json;charset=utf-8' });
   triggerDownload(blob, `${slugifyFilename(ideaTitle, untitledLabel)}.json`);
 }

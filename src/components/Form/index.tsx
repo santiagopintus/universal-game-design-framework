@@ -70,7 +70,7 @@ const MainForm = () => {
   };
 
   const handleDownloadJson = () => {
-    downloadJson(formState.ideaTitle, formState.values, t('untitledIdea'));
+    downloadJson(t, formState.ideaTitle, formState.values, t('untitledIdea'));
   };
 
   const handleDownloadPdf = async () => {
