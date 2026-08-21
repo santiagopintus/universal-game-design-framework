@@ -47,6 +47,10 @@ npm run lint     # lint the project
 - [MUI](https://mui.com/) and Tailwind CSS for styling
 - [Vercel Analytics](https://vercel.com/analytics)
 
+## AI Co-Pilot Roadmap
+
+We're evolving this questionnaire into an AI-Co-Pilot suite for Game Directors — context-aware field suggestions, a scope/feasibility audit, a design-pillar consistency watchdog, and a generative game loop visualizer, all powered by `gemini-2.5-flash` via Next.js API routes at zero cost. See [`AI-features.md`](./AI-features.md) for the full architecture, tech stack decisions, and per-feature status.
+
 ## Project structure
 
 - `src/form.tsx` — the questionnaire itself: `Field` and `Section` components composing the full framework

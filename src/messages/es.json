@@ -57,6 +57,14 @@
       "closeLabel": "Cerrar navegación de secciones"
     },
 
+    "ai": {
+      "suggestButton": "Obtener Sugerencias",
+      "loading": "Pensando…",
+      "error": "No se pudieron obtener sugerencias. Intenta de nuevo.",
+      "conservative": "Conservador",
+      "creative": "Creativo"
+    },
+
     "sections": {
       "constraints": {
         "title": "1. Restricciones del Proyecto",

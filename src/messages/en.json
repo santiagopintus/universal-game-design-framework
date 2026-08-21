@@ -57,6 +57,14 @@
       "closeLabel": "Close section navigation"
     },
 
+    "ai": {
+      "suggestButton": "Get Suggestions",
+      "loading": "Thinking…",
+      "error": "Couldn't get suggestions. Try again.",
+      "conservative": "Conservative",
+      "creative": "Creative"
+    },
+
     "sections": {
       "constraints": {
         "title": "1. Project Constraints",

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { getIdea, saveIdea } from '@/lib/ideaStorage';
 import { downloadJson, downloadMarkdown, downloadPdf } from '@/lib/exportIdea';
@@ -17,6 +17,7 @@ interface FormState {
 
 const MainForm = () => {
   const t = useTranslations('form');
+  const locale = useLocale();
   const router = useRouter();
   const placeholder = t('placeholder');
 
@@ -60,6 +61,37 @@ const MainForm = () => {
     value: formState.values[key] ?? '',
     onChange: (value: string) =>
       setFormState((prev) => ({ ...prev, values: { ...prev.values, [key]: value } })),
+  });
+
+  const fetchSuggestions = async (
+    fieldValueKey: string,
+    temperatureMode: 'conservative' | 'creative',
+  ): Promise<string[]> => {
+    const res = await fetch('/api/ai/suggest/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fieldValueKey,
+        locale,
+        values: formState.values,
+        temperatureMode,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error ?? 'Failed to fetch suggestions.');
+    }
+    return data.suggestions as string[];
+  };
+
+  const fieldProps = (key: string) => ({
+    ...field(key),
+    onAiSuggest: (temperatureMode: 'conservative' | 'creative') => fetchSuggestions(key, temperatureMode),
+    aiSuggestLabel: t('ai.suggestButton'),
+    aiLoadingLabel: t('ai.loading'),
+    aiErrorLabel: t('ai.error'),
+    aiConservativeLabel: t('ai.conservative'),
+    aiCreativeLabel: t('ai.creative'),
   });
 
   const handleSave = () => {
@@ -140,28 +172,28 @@ const MainForm = () => {
             title={t('sections.constraints.fields.budget.title')}
             guide={t('sections.constraints.fields.budget.guide')}
             placeholder={placeholder}
-            {...field('constraints.budget')}
+            {...fieldProps('constraints.budget')}
           />
           <Field
             name="constraints.teamSize"
             title={t('sections.constraints.fields.teamSize.title')}
             guide={t('sections.constraints.fields.teamSize.guide')}
             placeholder={placeholder}
-            {...field('constraints.teamSize')}
+            {...fieldProps('constraints.teamSize')}
           />
           <Field
             name="constraints.technology"
             title={t('sections.constraints.fields.technology.title')}
             guide={t('sections.constraints.fields.technology.guide')}
             placeholder={placeholder}
-            {...field('constraints.technology')}
+            {...fieldProps('constraints.technology')}
           />
           <Field
             name="constraints.productionScope"
             title={t('sections.constraints.fields.productionScope.title')}
             guide={t('sections.constraints.fields.productionScope.guide')}
             placeholder={placeholder}
-            {...field('constraints.productionScope')}
+            {...fieldProps('constraints.productionScope')}
           />
         </Section>
 
@@ -171,14 +203,14 @@ const MainForm = () => {
             title={t('sections.concept.fields.pitch.title')}
             guide={t('sections.concept.fields.pitch.guide')}
             placeholder={placeholder}
-            {...field('concept.pitch')}
+            {...fieldProps('concept.pitch')}
           />
           <Field
             name="concept.summary"
             title={t('sections.concept.fields.summary.title')}
             guide={t('sections.concept.fields.summary.guide')}
             placeholder={placeholder}
-            {...field('concept.summary')}
+            {...fieldProps('concept.summary')}
           />
         </Section>
 
@@ -191,28 +223,28 @@ const MainForm = () => {
             title={t('sections.mda.aesthetics.fields.emotionalExperience.title')}
             guide={t('sections.mda.aesthetics.fields.emotionalExperience.guide')}
             placeholder={placeholder}
-            {...field('mda.aesthetics.emotionalExperience')}
+            {...fieldProps('mda.aesthetics.emotionalExperience')}
           />
           <Field
             name="mda.aesthetics.playerFantasy"
             title={t('sections.mda.aesthetics.fields.playerFantasy.title')}
             guide={t('sections.mda.aesthetics.fields.playerFantasy.guide')}
             placeholder={placeholder}
-            {...field('mda.aesthetics.playerFantasy')}
+            {...fieldProps('mda.aesthetics.playerFantasy')}
           />
           <Field
             name="mda.aesthetics.desiredExperience"
             title={t('sections.mda.aesthetics.fields.desiredExperience.title')}
             guide={t('sections.mda.aesthetics.fields.desiredExperience.guide')}
             placeholder={placeholder}
-            {...field('mda.aesthetics.desiredExperience')}
+            {...fieldProps('mda.aesthetics.desiredExperience')}
           />
           <Field
             name="mda.aesthetics.memorableMoments"
             title={t('sections.mda.aesthetics.fields.memorableMoments.title')}
             guide={t('sections.mda.aesthetics.fields.memorableMoments.guide')}
             placeholder={placeholder}
-            {...field('mda.aesthetics.memorableMoments')}
+            {...fieldProps('mda.aesthetics.memorableMoments')}
           />
           <h3 id="mda.mechanics" className="text-xl font-semibold mb-3 text-accent">
             {t('sections.mda.mechanics.heading')}
@@ -222,28 +254,28 @@ const MainForm = () => {
             title={t('sections.mda.mechanics.fields.coreMechanics.title')}
             guide={t('sections.mda.mechanics.fields.coreMechanics.guide')}
             placeholder={placeholder}
-            {...field('mda.mechanics.coreMechanics')}
+            {...fieldProps('mda.mechanics.coreMechanics')}
           />
           <Field
             name="mda.mechanics.resources"
             title={t('sections.mda.mechanics.fields.resources.title')}
             guide={t('sections.mda.mechanics.fields.resources.guide')}
             placeholder={placeholder}
-            {...field('mda.mechanics.resources')}
+            {...fieldProps('mda.mechanics.resources')}
           />
           <Field
             name="mda.mechanics.rules"
             title={t('sections.mda.mechanics.fields.rules.title')}
             guide={t('sections.mda.mechanics.fields.rules.guide')}
             placeholder={placeholder}
-            {...field('mda.mechanics.rules')}
+            {...fieldProps('mda.mechanics.rules')}
           />
           <Field
             name="mda.mechanics.progressionSystems"
             title={t('sections.mda.mechanics.fields.progressionSystems.title')}
             guide={t('sections.mda.mechanics.fields.progressionSystems.guide')}
             placeholder={placeholder}
-            {...field('mda.mechanics.progressionSystems')}
+            {...fieldProps('mda.mechanics.progressionSystems')}
           />
           <h3 id="mda.dynamics" className="text-xl font-semibold mb-3 text-accent">
             {t('sections.mda.dynamics.heading')}
@@ -253,28 +285,28 @@ const MainForm = () => {
             title={t('sections.mda.dynamics.fields.playerBehaviors.title')}
             guide={t('sections.mda.dynamics.fields.playerBehaviors.guide')}
             placeholder={placeholder}
-            {...field('mda.dynamics.playerBehaviors')}
+            {...fieldProps('mda.dynamics.playerBehaviors')}
           />
           <Field
             name="mda.dynamics.decisionMaking"
             title={t('sections.mda.dynamics.fields.decisionMaking.title')}
             guide={t('sections.mda.dynamics.fields.decisionMaking.guide')}
             placeholder={placeholder}
-            {...field('mda.dynamics.decisionMaking')}
+            {...fieldProps('mda.dynamics.decisionMaking')}
           />
           <Field
             name="mda.dynamics.riskVsReward"
             title={t('sections.mda.dynamics.fields.riskVsReward.title')}
             guide={t('sections.mda.dynamics.fields.riskVsReward.guide')}
             placeholder={placeholder}
-            {...field('mda.dynamics.riskVsReward')}
+            {...fieldProps('mda.dynamics.riskVsReward')}
           />
           <Field
             name="mda.dynamics.socialDynamics"
             title={t('sections.mda.dynamics.fields.socialDynamics.title')}
             guide={t('sections.mda.dynamics.fields.socialDynamics.guide')}
             placeholder={placeholder}
-            {...field('mda.dynamics.socialDynamics')}
+            {...fieldProps('mda.dynamics.socialDynamics')}
           />
         </Section>
 
@@ -284,21 +316,21 @@ const MainForm = () => {
             title={t('sections.setting.fields.world.title')}
             guide={t('sections.setting.fields.world.guide')}
             placeholder={placeholder}
-            {...field('setting.world')}
+            {...fieldProps('setting.world')}
           />
           <Field
             name="setting.theme"
             title={t('sections.setting.fields.theme.title')}
             guide={t('sections.setting.fields.theme.guide')}
             placeholder={placeholder}
-            {...field('setting.theme')}
+            {...fieldProps('setting.theme')}
           />
           <Field
             name="setting.environmentalStorytelling"
             title={t('sections.setting.fields.environmentalStorytelling.title')}
             guide={t('sections.setting.fields.environmentalStorytelling.guide')}
             placeholder={placeholder}
-            {...field('setting.environmentalStorytelling')}
+            {...fieldProps('setting.environmentalStorytelling')}
           />
         </Section>
 
@@ -308,21 +340,21 @@ const MainForm = () => {
             title={t('sections.gameLoop.fields.coreLoop.title')}
             guide={t('sections.gameLoop.fields.coreLoop.guide')}
             placeholder={placeholder}
-            {...field('gameLoop.coreLoop')}
+            {...fieldProps('gameLoop.coreLoop')}
           />
           <Field
             name="gameLoop.sessionFlow"
             title={t('sections.gameLoop.fields.sessionFlow.title')}
             guide={t('sections.gameLoop.fields.sessionFlow.guide')}
             placeholder={placeholder}
-            {...field('gameLoop.sessionFlow')}
+            {...fieldProps('gameLoop.sessionFlow')}
           />
           <Field
             name="gameLoop.longTermProgression"
             title={t('sections.gameLoop.fields.longTermProgression.title')}
             guide={t('sections.gameLoop.fields.longTermProgression.guide')}
             placeholder={placeholder}
-            {...field('gameLoop.longTermProgression')}
+            {...fieldProps('gameLoop.longTermProgression')}
           />
         </Section>
 
@@ -332,21 +364,21 @@ const MainForm = () => {
             title={t('sections.playerGoals.fields.shortTerm.title')}
             guide={t('sections.playerGoals.fields.shortTerm.guide')}
             placeholder={placeholder}
-            {...field('playerGoals.shortTerm')}
+            {...fieldProps('playerGoals.shortTerm')}
           />
           <Field
             name="playerGoals.midTerm"
             title={t('sections.playerGoals.fields.midTerm.title')}
             guide={t('sections.playerGoals.fields.midTerm.guide')}
             placeholder={placeholder}
-            {...field('playerGoals.midTerm')}
+            {...fieldProps('playerGoals.midTerm')}
           />
           <Field
             name="playerGoals.longTerm"
             title={t('sections.playerGoals.fields.longTerm.title')}
             guide={t('sections.playerGoals.fields.longTerm.guide')}
             placeholder={placeholder}
-            {...field('playerGoals.longTerm')}
+            {...fieldProps('playerGoals.longTerm')}
           />
         </Section>
 
@@ -356,14 +388,14 @@ const MainForm = () => {
             title={t('sections.victoryFailure.fields.victoryConditions.title')}
             guide={t('sections.victoryFailure.fields.victoryConditions.guide')}
             placeholder={placeholder}
-            {...field('victoryFailure.victoryConditions')}
+            {...fieldProps('victoryFailure.victoryConditions')}
           />
           <Field
             name="victoryFailure.failureConditions"
             title={t('sections.victoryFailure.fields.failureConditions.title')}
             guide={t('sections.victoryFailure.fields.failureConditions.guide')}
             placeholder={placeholder}
-            {...field('victoryFailure.failureConditions')}
+            {...fieldProps('victoryFailure.failureConditions')}
           />
         </Section>
 
@@ -373,21 +405,21 @@ const MainForm = () => {
             title={t('sections.difficulty.fields.learningCurve.title')}
             guide={t('sections.difficulty.fields.learningCurve.guide')}
             placeholder={placeholder}
-            {...field('difficulty.learningCurve')}
+            {...fieldProps('difficulty.learningCurve')}
           />
           <Field
             name="difficulty.difficultyCurve"
             title={t('sections.difficulty.fields.difficultyCurve.title')}
             guide={t('sections.difficulty.fields.difficultyCurve.guide')}
             placeholder={placeholder}
-            {...field('difficulty.difficultyCurve')}
+            {...fieldProps('difficulty.difficultyCurve')}
           />
           <Field
             name="difficulty.mastery"
             title={t('sections.difficulty.fields.mastery.title')}
             guide={t('sections.difficulty.fields.mastery.guide')}
             placeholder={placeholder}
-            {...field('difficulty.mastery')}
+            {...fieldProps('difficulty.mastery')}
           />
         </Section>
 
@@ -397,14 +429,14 @@ const MainForm = () => {
             title={t('sections.replayability.fields.replayValue.title')}
             guide={t('sections.replayability.fields.replayValue.guide')}
             placeholder={placeholder}
-            {...field('replayability.replayValue')}
+            {...fieldProps('replayability.replayValue')}
           />
           <Field
             name="replayability.variability"
             title={t('sections.replayability.fields.variability.title')}
             guide={t('sections.replayability.fields.variability.guide')}
             placeholder={placeholder}
-            {...field('replayability.variability')}
+            {...fieldProps('replayability.variability')}
           />
         </Section>
 
@@ -414,28 +446,28 @@ const MainForm = () => {
             title={t('sections.principles.fields.principle1.title')}
             guide={t('sections.principles.fields.principle1.guide')}
             placeholder={placeholder}
-            {...field('principles.principle1')}
+            {...fieldProps('principles.principle1')}
           />
           <Field
             name="principles.principle2"
             title={t('sections.principles.fields.principle2.title')}
             guide={t('sections.principles.fields.principle2.guide')}
             placeholder={placeholder}
-            {...field('principles.principle2')}
+            {...fieldProps('principles.principle2')}
           />
           <Field
             name="principles.principle3"
             title={t('sections.principles.fields.principle3.title')}
             guide={t('sections.principles.fields.principle3.guide')}
             placeholder={placeholder}
-            {...field('principles.principle3')}
+            {...fieldProps('principles.principle3')}
           />
           <Field
             name="principles.tradeoffs"
             title={t('sections.principles.fields.tradeoffs.title')}
             guide={t('sections.principles.fields.tradeoffs.guide')}
             placeholder={placeholder}
-            {...field('principles.tradeoffs')}
+            {...fieldProps('principles.tradeoffs')}
           />
         </Section>
 
@@ -445,28 +477,28 @@ const MainForm = () => {
             title={t('sections.successCriteria.fields.playerExperience.title')}
             guide={t('sections.successCriteria.fields.playerExperience.guide')}
             placeholder={placeholder}
-            {...field('successCriteria.playerExperience')}
+            {...fieldProps('successCriteria.playerExperience')}
           />
           <Field
             name="successCriteria.gameplay"
             title={t('sections.successCriteria.fields.gameplay.title')}
             guide={t('sections.successCriteria.fields.gameplay.guide')}
             placeholder={placeholder}
-            {...field('successCriteria.gameplay')}
+            {...fieldProps('successCriteria.gameplay')}
           />
           <Field
             name="successCriteria.designGoals"
             title={t('sections.successCriteria.fields.designGoals.title')}
             guide={t('sections.successCriteria.fields.designGoals.guide')}
             placeholder={placeholder}
-            {...field('successCriteria.designGoals')}
+            {...fieldProps('successCriteria.designGoals')}
           />
           <Field
             name="successCriteria.redFlags"
             title={t('sections.successCriteria.fields.redFlags.title')}
             guide={t('sections.successCriteria.fields.redFlags.guide')}
             placeholder={placeholder}
-            {...field('successCriteria.redFlags')}
+            {...fieldProps('successCriteria.redFlags')}
           />
         </Section>
 
@@ -476,28 +508,28 @@ const MainForm = () => {
             title={t('sections.pillars.fields.pillar1.title')}
             guide={t('sections.pillars.fields.pillar1.guide')}
             placeholder={placeholder}
-            {...field('pillars.pillar1')}
+            {...fieldProps('pillars.pillar1')}
           />
           <Field
             name="pillars.pillar2"
             title={t('sections.pillars.fields.pillar2.title')}
             guide={t('sections.pillars.fields.pillar2.guide')}
             placeholder={placeholder}
-            {...field('pillars.pillar2')}
+            {...fieldProps('pillars.pillar2')}
           />
           <Field
             name="pillars.pillar3"
             title={t('sections.pillars.fields.pillar3.title')}
             guide={t('sections.pillars.fields.pillar3.guide')}
             placeholder={placeholder}
-            {...field('pillars.pillar3')}
+            {...fieldProps('pillars.pillar3')}
           />
           <Field
             name="pillars.neverBecome"
             title={t('sections.pillars.fields.neverBecome.title')}
             guide={t('sections.pillars.fields.neverBecome.guide')}
             placeholder={placeholder}
-            {...field('pillars.neverBecome')}
+            {...fieldProps('pillars.neverBecome')}
           />
         </Section>
 
