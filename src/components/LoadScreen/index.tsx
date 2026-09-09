@@ -15,11 +15,33 @@ import {
 } from '@/lib/ideaStorage';
 import ImportLocalIdeas from '../ImportLocalIdeas';
 
+const IdeaCardSkeleton = () => (
+  <li className="bg-surface border border-accent-muted rounded-xl p-4 flex items-center justify-between animate-pulse">
+    <div className="space-y-2">
+      <div className="h-4 w-40 rounded bg-accent-muted/40" />
+      <div className="h-3 w-56 rounded bg-accent-muted/30" />
+    </div>
+    <div className="flex items-center gap-2">
+      <div className="h-9 w-20 rounded-md bg-accent-muted/30" />
+      <div className="h-9 w-20 rounded-md bg-accent-muted/20" />
+    </div>
+  </li>
+);
+
+const IdeaListSkeleton = () => (
+  <ul className="space-y-4" aria-hidden="true">
+    <IdeaCardSkeleton />
+    <IdeaCardSkeleton />
+    <IdeaCardSkeleton />
+  </ul>
+);
+
 const LoadScreen = () => {
   const t = useTranslations('load');
   const { isLoaded: authLoaded, isSignedIn } = useAuth();
   const signedIn = Boolean(isSignedIn);
   const [ideas, setIdeas] = useState<SavedIdea[]>([]);
+  const [loading, setLoading] = useState(true);
   const [view, setView] = useState<'active' | 'deleted'>('active');
   const [importError, setImportError] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -28,7 +50,7 @@ const LoadScreen = () => {
 
   useEffect(() => {
     if (!authLoaded) return;
-    refreshIdeas();
+    refreshIdeas().finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authLoaded, signedIn]);
 
@@ -117,7 +139,9 @@ const LoadScreen = () => {
 
       {view === 'active' ? (
         <>
-          {activeIdeas.length === 0 ? (
+          {loading ? (
+            <IdeaListSkeleton />
+          ) : activeIdeas.length === 0 ? (
             <p className="text-text-muted">{t('empty')}</p>
           ) : (
             <ul className="space-y-4">
@@ -175,7 +199,9 @@ const LoadScreen = () => {
             </button>
           </div>
 
-          {deletedIdeas.length === 0 ? (
+          {loading ? (
+            <IdeaListSkeleton />
+          ) : deletedIdeas.length === 0 ? (
             <p className="text-text-muted">{t('emptyDeleted')}</p>
           ) : (
             <ul className="space-y-4">
