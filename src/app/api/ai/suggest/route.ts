@@ -66,7 +66,10 @@ export async function POST(request: Request) {
   }
 
   const fieldSchema = findFieldSchema(fieldValueKey)!;
-  const messages = (await import(`../../../../messages/${locale}.json`)).default;
+  // FORM_SCHEMA's keys (e.g. "sections.replayability.fields.replayValue.title")
+  // are relative to the 'form' translation namespace, matching how the client
+  // calls useTranslations('form') — so scope to that namespace here too.
+  const messages = (await import(`../../../../messages/${locale}.json`)).default.form;
 
   const fieldTitle = resolveMessage(messages, fieldSchema.titleKey);
   const fieldGuide = resolveMessage(messages, fieldSchema.guideKey);
