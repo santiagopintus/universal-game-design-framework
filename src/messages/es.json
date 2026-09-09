@@ -58,6 +58,7 @@
     },
 
     "ai": {
+      "hint": "Obtén sugerencias generadas por IA según la definición de tu proyecto",
       "suggestButton": "Obtener Sugerencias",
       "loading": "Pensando…",
       "error": "No se pudieron obtener sugerencias. Intenta de nuevo.",

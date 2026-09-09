@@ -58,6 +58,7 @@
     },
 
     "ai": {
+      "hint": "Get AI generated suggestions based on your project definitions",
       "suggestButton": "Get Suggestions",
       "loading": "Thinking…",
       "error": "Couldn't get suggestions. Try again.",

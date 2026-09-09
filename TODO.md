@@ -2,15 +2,15 @@
 
 [] Collapsible sections
 
-[] Auto-save to localStorage
+[X] Auto-save to localStorage
 
 [X] Markdown export
 
-[] JSON export/import
+[X] JSON export/import
 
 [] Progress indicator showing completion percentage
 
-[] Auto-growing textareas
+[X] Auto-growing textareas
 
 [] Keyboard shortcuts
 
@@ -18,4 +18,4 @@
 
 [] Printable layout
 
-[] Optional AI prompts for each section
+[X] Optional AI prompts for each section

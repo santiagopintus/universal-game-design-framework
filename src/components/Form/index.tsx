@@ -87,6 +87,7 @@ const MainForm = () => {
   const fieldProps = (key: string) => ({
     ...field(key),
     onAiSuggest: (temperatureMode: 'conservative' | 'creative') => fetchSuggestions(key, temperatureMode),
+    aiHintLabel: t('ai.hint'),
     aiSuggestLabel: t('ai.suggestButton'),
     aiLoadingLabel: t('ai.loading'),
     aiErrorLabel: t('ai.error'),
