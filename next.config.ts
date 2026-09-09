@@ -1,16 +1,7 @@
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
-// Set by the GitHub Actions workflow when deploying to a GitHub Pages project site
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-
 const nextConfig: NextConfig = {
-  // Static HTML export for GitHub Pages (no Node.js server available at runtime)
-  output: 'export',
-  basePath,
-  assetPrefix: basePath,
-  trailingSlash: true,
-
   // Enable compression for all text-based responses
   compress: true,
 

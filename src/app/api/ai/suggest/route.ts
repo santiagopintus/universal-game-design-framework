@@ -37,7 +37,10 @@ function parseSuggestions(text: string): string[] {
 export async function POST(request: Request) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return Response.json({ error: 'GEMINI_API_KEY is not configured on the server.' }, { status: 500 });
+    return Response.json(
+      { error: 'GEMINI_API_KEY is not configured on the server.' },
+      { status: 500 }
+    );
   }
 
   let body: SuggestRequestBody;
