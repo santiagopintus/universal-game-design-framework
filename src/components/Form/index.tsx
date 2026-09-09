@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { useAuth } from '@clerk/nextjs';
 import { useRouter } from '@/i18n/routing';
 import { getIdea, saveIdea } from '@/lib/ideaStorage';
 import { downloadJson, downloadMarkdown, downloadPdf } from '@/lib/exportIdea';
@@ -20,6 +21,7 @@ const MainForm = () => {
   const locale = useLocale();
   const router = useRouter();
   const placeholder = t('placeholder');
+  const { isLoaded: authLoaded, isSignedIn } = useAuth();
 
   const [formState, setFormState] = useState<FormState>({
     ideaTitle: '',
@@ -33,14 +35,17 @@ const MainForm = () => {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
+    if (!authLoaded) return;
+
     const id = new URLSearchParams(window.location.search).get('id');
     if (!id) return;
 
-    const idea = getIdea(id);
-    if (!idea) return;
-
-    setFormState({ ideaTitle: idea.ideaTitle, values: idea.values, currentId: idea.id });
-  }, []);
+    getIdea(id, Boolean(isSignedIn)).then((idea) => {
+      if (!idea) return;
+      setFormState({ ideaTitle: idea.ideaTitle, values: idea.values, currentId: idea.id });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authLoaded]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -95,15 +100,18 @@ const MainForm = () => {
     aiCreativeLabel: t('ai.creative'),
   });
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const id = formState.currentId ?? crypto.randomUUID();
 
-    saveIdea({
-      id,
-      ideaTitle: formState.ideaTitle,
-      updatedAt: new Date().toISOString(),
-      values: formState.values,
-    });
+    await saveIdea(
+      {
+        id,
+        ideaTitle: formState.ideaTitle,
+        updatedAt: new Date().toISOString(),
+        values: formState.values,
+      },
+      Boolean(isSignedIn),
+    );
 
     if (!formState.currentId) {
       setFormState((prev) => ({ ...prev, currentId: id }));

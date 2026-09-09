@@ -18,6 +18,13 @@
     "rights": "All rights reserved."
   },
 
+  "importLocalIdeas": {
+    "message": "You have {count, plural, one {# idea} other {# ideas}} saved on this device. Import them into your account?",
+    "dismiss": "Not now",
+    "import": "Import",
+    "importing": "Importing..."
+  },
+
   "load": {
     "title": "Saved Ideas",
     "empty": "No saved ideas yet.",

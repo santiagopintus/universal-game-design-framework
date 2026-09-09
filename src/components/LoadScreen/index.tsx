@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useAuth } from '@clerk/nextjs';
 import { Link } from '@/i18n/routing';
 import {
   deleteIdeaForever,
@@ -12,35 +13,42 @@ import {
   softDeleteIdea,
   type SavedIdea,
 } from '@/lib/ideaStorage';
+import ImportLocalIdeas from '../ImportLocalIdeas';
 
 const LoadScreen = () => {
   const t = useTranslations('load');
+  const { isLoaded: authLoaded, isSignedIn } = useAuth();
+  const signedIn = Boolean(isSignedIn);
   const [ideas, setIdeas] = useState<SavedIdea[]>([]);
   const [view, setView] = useState<'active' | 'deleted'>('active');
   const [importError, setImportError] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const refreshIdeas = () => getAllIdeas(signedIn).then(setIdeas);
+
   useEffect(() => {
-    setIdeas(getAllIdeas());
-  }, []);
+    if (!authLoaded) return;
+    refreshIdeas();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authLoaded, signedIn]);
 
   const activeIdeas = ideas.filter((idea) => idea.deletedAt === null);
   const deletedIdeas = ideas.filter((idea) => idea.deletedAt !== null);
 
-  const handleDelete = (id: string) => {
-    softDeleteIdea(id);
-    setIdeas(getAllIdeas());
+  const handleDelete = async (id: string) => {
+    await softDeleteIdea(id, signedIn);
+    refreshIdeas();
   };
 
-  const handleRestore = (id: string) => {
-    restoreIdea(id);
-    setIdeas(getAllIdeas());
+  const handleRestore = async (id: string) => {
+    await restoreIdea(id, signedIn);
+    refreshIdeas();
   };
 
-  const handleDeleteForever = (id: string) => {
+  const handleDeleteForever = async (id: string) => {
     if (!window.confirm(t('deleteForeverConfirm'))) return;
-    deleteIdeaForever(id);
-    setIdeas(getAllIdeas());
+    await deleteIdeaForever(id, signedIn);
+    refreshIdeas();
   };
 
   const handleImportClick = () => {
@@ -60,12 +68,13 @@ const LoadScreen = () => {
       return;
     }
 
-    importIdea(parsed);
-    setIdeas(getAllIdeas());
+    await importIdea(parsed, signedIn);
+    refreshIdeas();
   };
 
   return (
     <main className="max-w-5xl mx-auto px-4 py-8 space-y-8">
+      <ImportLocalIdeas onImported={refreshIdeas} />
       <div className="mb-2 space-y-3">
         <h1 className="text-2xl font-bold text-foreground">{t('title')}</h1>
         <div className="flex items-center justify-end gap-3">

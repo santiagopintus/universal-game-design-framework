@@ -18,6 +18,13 @@
     "rights": "Todos los derechos reservados."
   },
 
+  "importLocalIdeas": {
+    "message": "Tienes {count, plural, one {# idea} other {# ideas}} guardadas en este dispositivo. ¿Quieres importarlas a tu cuenta?",
+    "dismiss": "Ahora no",
+    "import": "Importar",
+    "importing": "Importando..."
+  },
+
   "load": {
     "title": "Ideas Guardadas",
     "empty": "Todavía no hay ideas guardadas.",
