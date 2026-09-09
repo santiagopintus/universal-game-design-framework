@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -45,7 +46,7 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  // Enable static rendering for this locale (no middleware at runtime for static export)
+  // Enable static rendering for this locale
   setRequestLocale(locale);
 
   // Providing all messages to the client side
@@ -59,7 +60,9 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${mainFont.variable} antialiased`} suppressHydrationWarning>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <ClerkProvider>
+          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
+import { Show, SignInButton, UserButton } from '@clerk/nextjs';
 import { Link } from '@/i18n/routing';
 import LanguageSwitcher from './LanguageSwitcher';
 
@@ -33,6 +34,16 @@ export default async function Header() {
           {t('loadLink')}
         </Link>
         <LanguageSwitcher />
+        <Show when="signed-out">
+          <SignInButton mode="modal">
+            <button className="text-sm text-text-muted hover:text-foreground transition-colors">
+              {t('signIn')}
+            </button>
+          </SignInButton>
+        </Show>
+        <Show when="signed-in">
+          <UserButton />
+        </Show>
       </div>
     </header>
   );

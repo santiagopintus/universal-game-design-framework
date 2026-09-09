@@ -9,7 +9,8 @@
   "header": {
     "languageLabel": "Idioma",
     "toggleMenu": "Abrir menú",
-    "loadLink": "Mis Ideas"
+    "loadLink": "Mis Ideas",
+    "signIn": "Iniciar sesión para sincronizar"
   },
 
   "footer": {
