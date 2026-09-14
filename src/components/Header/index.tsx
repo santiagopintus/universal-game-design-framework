@@ -29,7 +29,7 @@ export default async function Header() {
       <div className="flex items-center gap-4">
         <Link
           href="/load"
-          className="text-sm text-text-muted hover:text-foreground transition-colors"
+          className="hidden md:inline-block text-sm text-text-muted hover:text-foreground transition-colors"
         >
           {t('loadLink')}
         </Link>

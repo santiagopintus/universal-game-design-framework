@@ -6,6 +6,8 @@ import { NAV_SECTIONS } from './navConfig';
 
 type SidebarProps = {
   values: Record<string, string>;
+  mobileOpen: boolean;
+  onClose: () => void;
 };
 
 const isFieldComplete = (values: Record<string, string>, key: string) =>
@@ -20,10 +22,9 @@ const scrollToId = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
-const Sidebar = ({ values }: SidebarProps) => {
+const Sidebar = ({ values, mobileOpen, onClose }: SidebarProps) => {
   const t = useTranslations('form');
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   const allIds = useMemo(
     () =>
@@ -58,7 +59,7 @@ const Sidebar = ({ values }: SidebarProps) => {
 
   const handleSelect = (id: string) => {
     scrollToId(id);
-    setMobileOpen(false);
+    onClose();
   };
 
   const navList = (
@@ -133,31 +134,18 @@ const Sidebar = ({ values }: SidebarProps) => {
         {navList}
       </aside>
 
-      <button
-        type="button"
-        onClick={() => setMobileOpen(true)}
-        aria-label={t('sidebar.toggleLabel')}
-        className="md:hidden cursor-pointer fixed bottom-6 left-6 z-50 rounded-full bg-surface border border-accent-muted p-3 shadow-lg text-foreground"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="18" x2="21" y2="18" />
-        </svg>
-      </button>
-
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 z-50 flex">
           <button
             type="button"
             aria-label={t('sidebar.closeLabel')}
-            onClick={() => setMobileOpen(false)}
+            onClick={onClose}
             className="absolute inset-0 bg-black/60 cursor-pointer"
           />
           <div className="relative w-72 max-w-[80vw] h-full bg-surface border-r border-accent-muted p-6 overflow-y-auto">
             <button
               type="button"
-              onClick={() => setMobileOpen(false)}
+              onClick={onClose}
               aria-label={t('sidebar.closeLabel')}
               className="cursor-pointer mb-4 text-text-muted hover:text-foreground"
             >

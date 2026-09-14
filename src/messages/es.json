@@ -59,6 +59,12 @@
     "untitledIdea": "Idea de Juego Sin Título",
     "noAnswer": "(Sin respuesta)",
 
+    "bottomNav": {
+      "label": "Acciones rápidas",
+      "myIdeasLabel": "Mis Ideas",
+      "newIdeaLabel": "Nueva Idea"
+    },
+
     "sidebar": {
       "heading": "Secciones",
       "toggleLabel": "Abrir navegación de secciones",

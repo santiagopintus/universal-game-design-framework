@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useAuth } from '@clerk/nextjs';
+import AddIcon from '@mui/icons-material/Add';
 import { Link } from '@/i18n/routing';
 import {
   deleteIdeaForever,
@@ -238,6 +239,14 @@ const LoadScreen = () => {
           )}
         </>
       )}
+
+      <Link
+        href="/"
+        aria-label={t('newIdea')}
+        className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-accent text-background shadow-lg hover:opacity-90 transition-opacity"
+      >
+        <AddIcon />
+      </Link>
     </main>
   );
 };

@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useAuth } from '@clerk/nextjs';
+import DownloadIcon from '@mui/icons-material/Download';
 import { useRouter } from '@/i18n/routing';
 import { getIdea, saveIdea } from '@/lib/ideaStorage';
 import { downloadJson, downloadMarkdown, downloadPdf } from '@/lib/exportIdea';
 import Field from './Field';
 import Section from './FormSection';
 import Sidebar from './Sidebar';
+import BottomNav from './BottomNav';
 
 interface FormState {
   ideaTitle: string;
@@ -31,7 +33,9 @@ const MainForm = () => {
   const [saved, setSaved] = useState(false);
   const [exportingPdf, setExportingPdf] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
@@ -51,7 +55,10 @@ const MainForm = () => {
     if (!menuOpen) return;
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      const insideDesktopMenu = menuRef.current?.contains(target);
+      const insideMobileMenu = mobileMenuRef.current?.contains(target);
+      if (!insideDesktopMenu && !insideMobileMenu) {
         setMenuOpen(false);
       }
     };
@@ -156,7 +163,11 @@ const MainForm = () => {
 
   return (
     <div className="max-w-7xl mx-auto md:flex md:items-start md:gap-8 px-4 md:px-8">
-      <Sidebar values={formState.values} />
+      <Sidebar
+        values={formState.values}
+        mobileOpen={mobileSidebarOpen}
+        onClose={() => setMobileSidebarOpen(false)}
+      />
       <main className="md:w-[60%] mx-auto py-8 pb-28 space-y-8">
         <h1 className="text-2xl font-bold mb-2 text-foreground min-[850px]:hidden">{t('title')}</h1>
         <p className="text-text-muted mb-8">{t('description')}</p>
@@ -542,7 +553,7 @@ const MainForm = () => {
           />
         </Section>
 
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2">
+        <div className="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex-col items-center gap-2">
           {saved && (
             <span className="px-3 py-1.5 rounded-md bg-surface border border-accent-muted text-accent text-sm shadow-sm">
               {t('savedConfirmation')}
@@ -600,6 +611,7 @@ const MainForm = () => {
               aria-expanded={menuOpen}
               className="cursor-pointer flex items-center gap-2 px-6 py-3 rounded-lg bg-accent text-background font-medium shadow-lg hover:opacity-90 transition-opacity"
             >
+              <DownloadIcon fontSize="small" />
               {t('exportMenuButton')}
               <svg
                 width="12"
@@ -618,6 +630,20 @@ const MainForm = () => {
             </button>
           </div>
         </div>
+
+        <BottomNav
+          t={t}
+          saved={saved}
+          menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
+          menuRef={mobileMenuRef}
+          exportingPdf={exportingPdf}
+          onOpenSidebar={() => setMobileSidebarOpen(true)}
+          onDownloadJson={handleDownloadJson}
+          onDownloadMd={handleDownloadMd}
+          onDownloadPdf={handleDownloadPdf}
+          onSave={handleSave}
+        />
       </main>
     </div>
   );
